@@ -1,0 +1,90 @@
+/* [Dentakun] */
+/*#region*/
+.Dentakun{
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  margin: 0 auto;
+  background-color: rgb(215, 215, 215);
+  max-width: 300px;
+  border-radius: .5rem;
+  animation-name: godenta;
+  animation-duration: .1s;
+  animation-fill-mode: both;
+}
+@keyframes godenta {
+  0%{
+    width: 0;
+    opacity: 0;
+  }
+  70%{
+    opacity: 0;
+  }
+  100%{
+    width: 21rem;
+  }
+}
+.Dentaku{
+  margin-left: 5px;
+  width: 14.5rem;
+}
+.Denta_CalcTitle{
+  margin: 0 auto;
+  width: fit-content;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.Kouho{
+  width: 5rem;
+}
+.Denta_Calc{
+  margin: 6px 0;
+  width: 5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: solid 1px white;
+  border-radius: .5rem;
+  background-color: rgb(255, 197, 197);
+}
+.Denta_Calc.Plus{
+  color: rgb(9, 132, 46);
+}
+.Denta_Calc.Minus{
+  color: rgb(59, 59, 204);
+}
+.Denta_TenkeySet{
+  background-color: black;
+  border-radius: .5rem;
+}
+.Denta_Tenkey{
+  height: 3rem;
+  width: 4.5rem;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: .5rem;
+  border: solid 1px rgb(147, 147, 147);
+  background-color: rgba(87, 87, 87, 0.81);
+  font-size: 1.6rem;
+  color: white;
+}
+.Denta_Tenkey_clicked{
+  background-color: rgb(226, 226, 226);
+  color: black;
+  border-radius: .8rem;
+  transform: scale(.97);
+  transition-duration: 1s;
+}
+.Dentakun_Exit::before{
+  content: "✖ ";
+}
+.Dentakun_Exit{
+  margin: 8px auto;
+  width: calc(100% - 10%);
+  font-weight: bold;
+  background-color: rgb(180, 180, 180);
+  border-radius: 1rem;
+  text-align: center;
+}
+/*#endregion*/

@@ -1,0 +1,535 @@
+html,body,form,nav,main,section,div,span,
+table,tr,th,td,ul,li,h1,h2,h3,input,label,p
+{margin:0px;padding:0px;box-sizing: border-box;}
+form{
+    height:100%;
+    width: 100%;
+    font-size:50%; 
+    font-weight: bold;
+    line-height: 1.5;
+    font-family:"Yu Gothic";
+    background-color: #fafcff;
+    overflow: visible;
+}
+section{
+    width: 100%;
+    background-color: #fdfeff;
+}
+.Section_Center {
+    width: 95%;
+    margin: 0px auto;
+}
+@media screen and (min-width:300px){
+    form{
+        font-size: 55%;
+    }  
+}
+@media screen and (min-width:350px){
+    form{
+        font-size: 62.5%;
+    }  
+}
+@media screen and (min-width:420px){
+    form{
+        font-size: 75%;
+    }
+}
+@media screen and (min-width:520px){
+    form{
+        font-size: 82.5%;
+    }
+    .Section_Flex{
+        width: 350px;
+    }
+    .Section_Single{
+        width: 520px;
+    }
+}
+@media screen and (min-width:730px){
+    .Section_Single{
+        width: 730px;
+    }
+    .FirstSet{
+        width: 750px;
+        margin: 0px auto;
+    }
+    .SecondSet{
+        width: 730px;
+        margin: 0px auto;
+    }
+    .TherdSet{
+        margin: 0px auto;
+    }
+}
+@media screen and (min-width:1170px){
+    .SecondSet{
+        width: 350px;
+    }
+    section{
+        background-color: #fafcff;
+    }
+}
+@media screen and (min-width:1560px){
+    .TherdSet{
+        width: 350px;
+    }
+}
+/* common */
+.List{
+    list-style: none;
+}
+.Flex{
+    display: flex;
+    flex-wrap: wrap;  
+}
+.NoneText{
+    display: none;
+}
+input[type="radio"]{
+    margin:0px 2px;
+    height:1.1em;
+    width:1.1em;
+    vertical-align: middle;
+}
+input[type="number"]{
+    width: 3.5em;
+    text-align: right;
+    margin: 0px 5px;
+}
+table{
+    border-collapse:collapse;
+}
+section div{
+    margin: 2px 0px;
+}
+/* main span{
+    border-radius: 0.5em;
+    box-shadow: 0px 1px 0px 0px #83aff5 ;
+} */
+/* Header */
+.Header{
+    text-align: center;
+}
+.Header,.Header_Listitem{
+    background-color:#b4f2f5;
+}
+.Header_H1{
+    padding: 2px 0px;
+    vertical-align:bottom;   
+}
+.Header_P{
+    font-size:120%;
+}
+.Header_List{
+    position: sticky;
+    top: 0px;
+    height:1.5rem;
+    width: 100%;  
+}
+.Header_Listitem{
+    width: 50%;
+    font-size: 120%;
+    text-align: center;
+    border: solid 1px #e6f6f8 ;
+    box-shadow:0px -2px 3px 0px rgba(204, 208, 220, 0.783) inset;
+    background-color: rgb(220, 253, 255);
+}
+/* Preview_Damege */
+.Section_Preview_Damege{
+    z-index: 1;
+    background-color: #d9fcede0;
+}
+.Damege_Table{
+    width: 27em;
+    font-size: 120%;  
+}
+.Damege_Table tr:nth-child(n+3){
+    border-bottom:solid 2px rgb(203, 212, 220);
+    text-align: right; 
+}
+.Damege_Table_col{
+    width: 3em;
+    
+}
+.Damege_Table_col2{
+    width:7em;
+}
+.Damege_Table_col3{
+    width:4em;
+}
+.Preview_Torauma{
+    display: inline-block;
+    margin: 5px 20px 5px 5px;
+    width: 8rem;
+    font-size: 1.2em;   
+}
+#ToraumaRate{
+    margin-bottom:5px;
+    height: 1rem;
+    vertical-align:middle;
+}
+#Preview_Option_Damege{
+    margin:0px 5px;   
+}
+h3{
+    margin: 8px 0px 5px;
+}
+#Preview_Option_Damege label{
+    display: inline-block;
+    width: 4rem;
+    margin-right: 5px;
+}
+.Section_Preview_Damege,
+.Section_Preview_Status{
+    position: sticky;
+    top:1.5rem;
+}
+.ClosedCheker::after{
+    content: " ▼";
+    font-size: 0.8em;
+}
+/* Preview_Status */
+.Section_Preview_Status{
+    z-index: 1;
+    background-color: rgba(221, 160, 221, 0.85);
+}
+.Preview_Status{
+    margin: 0px 5px;
+}
+.Status_Table tr{
+    border-bottom:solid 1px #cb3bff ;
+}
+.Status_Table td:nth-child(odd){
+    width: 8em;
+    font-size: 1em;
+}
+.Status_Table td:nth-child(even){
+    width: 4em;
+    font-size: 1em;
+}
+.Status_Table2 {
+    margin: 9px 0px;
+}
+.Status_Table2 tr{
+    border-bottom:solid 1px #cb3bff ;
+}
+.Status_Table2 td{
+    width:4em;
+    text-align: center;
+}
+.Status_Table2 td:nth-child(3n+1){
+    width:9em;
+    text-align: left;
+}
+
+/* Slide? */
+.SideLink{
+    position: fixed;
+    display: block;
+    top:12%;
+    right:0px;
+    height: 50px;
+    width: 20px;
+    background-color: #bebec09b;
+    margin: 0px;
+    padding: 0px;
+    transition-duration: .5s;
+}
+.Slidego{
+    right: 80%;
+    transition-duration: .5s;
+}
+.SideLink_Content{
+    position: fixed;
+    top:12%;
+    right: 0;
+    height: 0;
+    width: 0;
+    background-color: #bebec0cf;
+    transition-duration: .5s;
+}
+.Content{
+    transition-duration: .5s;
+    top:12%;
+    height: inherit;
+    width: 80%;
+}
+@media screen and (min-width:700px) {
+    .Slidego{
+        right: 50%;
+    }
+    .Content{
+        width: 50%;
+    }
+}
+.Content_lapid{
+    transition-duration: 0.1s;
+}
+.Btn,.Btn2{
+    font-weight: bold;
+    margin: 8px 0;
+    border-radius: 2em;
+    background-color: rgb(207, 246, 246);
+}
+.Btn:hover{
+    transition-delay: 0s;
+    transform: translate(1px,2px);
+}
+.Btn:active{
+    transition-delay: 0s;
+    color: #cb3bff;
+}
+.Content_TextSet{
+    transition-duration: 0.1s;
+    font-size: 0px;
+    height: 0;
+    width: 0;
+    border: none;
+}
+.Content_TextSet_Go{
+    transition-delay: 0.4s;
+    transition-duration: 0.1s;
+    font-size: inherit;
+    height: inherit;
+    width: 100%;
+}
+.MyData {
+    margin:2.5%;
+    width:45%;
+    background-color: #d3f9cc;
+}
+.SideLink::before{
+    content: "";
+    position:absolute;
+    top: 40%;
+    left: 6px;
+    height:10px;
+    width: 10px;
+    border-left:solid 1px;
+    border-bottom: solid 1px;
+    transition-delay: .4s;
+    transition-duration:.3s;
+    transform:rotate(45deg);
+}
+.Slidego::before{
+    left: 2px;
+    transition-delay: .4s;
+    transition-duration:.3s;
+    transform:rotate(225deg);
+}
+
+.SideLink_List{
+    height: 1.5rem;
+    width:100%;
+    background-color: #d3f9cc;
+}
+.SideLink_List,.SlideSelecter{
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+.SlideSelecter{
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    width:50%;
+}
+.SlideSelecter:hover{
+    background-color: #62dcec;  
+}
+
+
+/* main */
+main section{
+    margin:0px 0px 15px 5px;
+}
+/* Set_Status */
+.Set_Status_Text{
+    display: inline-block;
+    width: 3em;
+}
+/* Set_Wepon */
+.Set_Wepon_Text{
+    display: inline-block;
+    width: 6em;  
+}
+.Wepons div:nth-child(1){
+    margin-right: 20px;
+}
+/* Set_Equipment */
+.AmorSelecter_p{
+    margin: 5px 0px;
+    font-size:1.2em
+}
+.Epuipment_List{
+    top:1.5rem;
+    width: 100%;
+    
+}
+.Epuipment_Listitem{
+    width:33.3%;
+    background-color: rgb(250, 175, 175);
+    border:solid 1px rgb(239, 196, 196);
+    border-radius: 10em;
+    text-align: center;
+}
+.Addition_Text,
+.Addition_Text2{
+    display: inline-block;
+}
+.Addition_Text{
+    margin-left: 5px;
+    width: 6em;
+}
+.Addition_Text2{
+    text-align: center;
+    width:3.5em ;
+    margin: 0px 5px;
+}
+.Addition_Stylenone{
+    border: none;
+    background-color: inherit;
+}
+/* Set_Crystal */
+.CrystalSelecter{
+    width: 15em;
+}
+.Crystals div:nth-child(1) select,
+.Crystals div:nth-child(2) select{
+    background-color: #ffeeee;
+}
+.Crystals div:nth-child(3) select,
+.Crystals div:nth-child(4) select{
+    background-color: #eefff6;
+}
+.Crystals div:nth-child(5) select,
+.Crystals div:nth-child(6) select{
+    background-color: #ffffed;
+}
+.Crystals div:nth-child(7) select,
+.Crystals div:nth-child(8) select{
+    background-color: #f5ecff;
+}
+.AttributeRefelence{
+    margin: 0 10px;
+    height: 1.2rem;
+    font-size: 0.7rem;
+    border-radius: .6rem;
+    background-color: #c6f485;
+    color: #000;
+    border: solid 1px;
+}
+.AttributeRefelence:hover{
+    background-color: #b8bce8;
+}
+/* 装備リファレンス説明 */
+.Refelence_Box{
+    width: 100%;
+    border:solid 1px;
+    border-radius: .5rem;
+    background-color: #cce7f9;
+}
+.Refelence_Text{
+    display: inline-block;
+    margin: 0 0 0 10px;
+}
+/* ItemBuff */
+.ItemBuff_Text{
+    display:block;
+    width:7em;
+}
+.ItemBuffSelecter{
+    width: 12em;
+}
+/* EatBuff */
+.EatSelecter{
+    width:12em;
+    margin: 0px 5px;
+}
+.EatSelecter_Lv{
+    width: 3em;
+}
+/* PbuffSkill */
+#PassiveBuffs{
+    display: flex;
+    flex-wrap: wrap;
+    width: 28em;   
+}
+.Pbuffs{
+    width:9em;
+    font-size: 0.8em;
+}
+.Pbuffs input[type="radio"]{
+    height: 0.9em;
+    width:0.9em;
+}
+.Pbuffs:nth-child(2n+1){
+    background-color: #f0fcfd;
+}
+.Pbuffs:nth-child(2n){
+    background-color: #faf9ec;
+}
+/* Attakerskills */
+.P_Skill_Span{
+    display: inline-block;
+    width: 7em;
+}
+.P_Skill_Span::after{
+    content: ":";
+}
+.SkillPowers{
+    margin: 5px 0;
+}
+.SkillPowers > p{
+    text-decoration: underline;
+}
+.SkillText{
+    border: solid 1px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+.SkillText > p{
+    font-size: 10px;
+}
+.SkillText > p > span{
+    background-color:#fec7c7 ;
+    border-radius: 5px;
+}
+#SkillSelecter{
+    width: 18em;
+}
+.SkillsSelecterSet{
+    width: 100%;
+}
+.SkillsSelecter{
+    margin: 0.17em;
+    height:2em;
+    text-align: center;
+    border: solid 1px rgb(226, 225, 225);
+    border-radius: 8em;
+}
+.SkillsSelecter:hover{
+    transform: translate3d(1px,1px,0px);
+}
+.SkillsSelecterSet .SkillsSelecter:not(:nth-child(1)){
+    width:31%;
+}
+.SkillsSelecterSet .SkillsSelecter:nth-child(1){
+    width:96%;
+}
+.Selectedskill{
+    background-color: #62dcec;
+    font-weight: bold;
+    border:solid 2px #4f3a9f;
+}
+
+/* footer */
+footer{
+    background-color: #eaf3f4;
+}
+.Footer_Text{
+    display: inline-block;
+    margin-top: 10px;
+    vertical-align: middle;
+    height: 30px;
+    
+}

@@ -1,0 +1,160 @@
+html,body,form,nav,main,section,div,span,
+table,tr,th,td,ul,li,h1,h2,h3,input,label
+{margin:0px;padding:0px;box-sizing: border-box;}
+form{
+    height:100%;
+    width: 100%;
+    font-size:70%; 
+    font-weight: bold;
+    line-height: 1.5;
+    font-family:"Yu Gothic";
+}
+/*ヘッダー*/
+.HeaderArea{
+    width: 100%; 
+    text-align: center;
+}
+.HeaderArea_Main{
+    width: 100%;
+    height: 10%;
+}
+h1{display: inline;}
+.p1{margin:0px 10px;}
+.HeaderArea,.StatusMenu{background-color:#b4f2f5;}
+
+.Nonetext{display: none;}
+/*リスト用*/
+.MenuList{
+    list-style:none; 
+    font-weight: bold; 
+}
+/*上段リスト*/
+.StatusMenu{
+    text-align: center;
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    height:1rem;
+    z-index: 1;
+}
+.StatusMenu_chd{
+    width: 50%; 
+}
+.MenuList,.FlexText{
+    display: flex;
+    flex-wrap: wrap;  
+}
+.MainMenu_chd{
+    width:9em; 
+    text-align: center;
+    margin:2px 10px 5px 5px;
+    border-bottom:solid 1px rgb(255, 243, 243);
+}
+.MainMenu_chd:hover{
+    border-bottom:solid 1px black;
+}
+/*カーソル合わせ*/
+.MainMenu_chd:hover,
+.StatusMenu_chd:hover,
+.Epuipment_ListItem:hover{
+    transform:translate(0px,1px) ;
+}
+/*選択メニュー*/
+.MainMenu_Textline{
+    position: fixed;
+    top: 50%;
+    right: 0px;
+    width:5em;
+    transform: rotate(0deg);
+    background-color: rgb(246, 245, 240);
+    text-align: center;
+    font-weight: bold;
+}
+.MainMenu_ShowArea{
+    position: fixed;
+    background-color: rgb(245, 240, 240);
+    width:100%;
+    bottom:0%;
+}
+
+/* ダメージ情報 */
+h2{width: 100%;margin:20px 0px 10px;}
+#ShowDamegeArea,
+#ShowStatusArea{
+    position:sticky;
+    top: 1rem;
+    height: 0;
+}
+.ShowStatus{
+    background-color: rgba(202, 245, 240, 0.8);
+}
+.TableArea{margin: 0px 20px 0px 0px;}
+.Table{
+    font-weight: bold;
+    border-spacing: 0px;
+}
+.Table td{border-bottom: solid 1px black;}
+
+.Table_Row_Text{width: 6em;}
+.Table_Row_Damege,
+.Table_Row_Stable{
+    text-align: right;
+}
+.Table_Row_Damege{
+    width: 5rem;
+}
+.Table_Row_Stable{
+    width: 3rem;
+}
+/*ダメージオプション*/
+.Skill{vertical-align: middle;}
+.Skill_Select{
+    width: 4rem;
+    height: 1rem;
+    vertical-align: middle;   
+}
+/*合計ステータス表示*/
+.Table_Row_Status{
+    width: 2.5rem;
+}
+
+/*インプット要素*/
+input[type="number"]{
+    text-align: right;
+    width: 3rem;
+}
+.InlineText{
+    display: inline;
+    width: 4rem;
+}
+.InputStatusArea_Text{
+    margin: 0px 5px;
+}
+
+/*装備品能力入力*/
+.Epuipment_List{
+    position: sticky;
+    top: 1rem;
+    z-index: 0;
+}
+.Epuipment_ListItem{
+    width: 25%;
+    text-align: center;
+    border: solid 1px rgb(228, 225, 225);
+    background-color: antiquewhite;
+}
+h3{margin: 10px 0px;}
+
+.InputArea{
+    display: flex;
+    flex-wrap: wrap;
+}
+.addition{
+    display: inline-block;
+}
+.Addition_Text{
+    display: inline-block;
+    width: 4.5rem;
+}
+.Addition_Text2{margin:0px 11px;}
+.ClickShow{display:none;}

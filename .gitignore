@@ -1,0 +1,23 @@
+# minified files
+*.min*
+
+# PHP
+*.php
+/PHP/
+/API/
+
+# Images
+*.jpg
+*.png
+*.ico
+/picture/
+
+# test-related
+*test*
+
+# text files
+*.txt
+
+
+# vscode
+.vscode/

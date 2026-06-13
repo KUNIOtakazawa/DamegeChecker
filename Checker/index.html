@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="../damegechecker/JS/Judey.min.js"></script>
+  <!-- <script src="/JS/Judey.min.js"></script> -->
+  <style>
+    .Contents{
+      margin: 10px auto;
+      padding: 10px;
+      width: 98vw;
+      max-width: 500px;
+      border: solid 3px #1b4593;
+      border-radius: 1rem;
+      background-color: rgb(227, 242, 255);
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <div class="Contents">
+    <p class="fw-bold fs-4">確認は安定率100%でGlazeしない槍で!</p>
+    <p class="fw-bold">※加算系倍率は全て0％、</p>
+    <div class="d-flex">
+      <p id="Res_DEF" class="fs-4 me-5">DEF:</p>
+      <p id="Res_MDEF" class="fs-4">MDEF：</p>
+    </div> 
+    <div class="d-flex mb-1">
+      <p id="Res_Resist_Physical" class="fs-4 me-5">物理耐性:</p>
+      <p id="Res_Resist_Magic" class="fs-4">魔法耐性：</p>
+    </div>   
+    <p class="fw-bold fs-5">1.DEFと物理耐性(通常白ダメ)</p>
+    <div class="d-flex">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">自レベル</span>
+        <input type="number" class="form-control" id="MyLevel">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon2">敵レベル</span>
+        <input type="number" class="form-control" id="EnemyLevel">
+      </div>          
+    </div>
+    <div class="input-group mb-3">
+      <input type="number" id="ATK-1-1" class="form-control" placeholder="ATK">
+      <span class="input-group-text">①</span>
+      <input type="number" id="Damege-1-1" class="form-control" placeholder="ダメージ" aria-label="Server">          
+    </div>
+    <div class="input-group mb-3">
+      <input type="number" id="ATK-1-2" class="form-control" placeholder="ATK">
+      <span class="input-group-text">②</span>
+      <input type="number" id="Damege-1-2" class="form-control" placeholder="ダメージ" aria-label="Server">          
+    </div>
+    <p class="fw-bold fs-5">2.MDEF確認(フルドラ2段目:クリダメ200%)</p>
+    <div class="input-group mb-3">
+      <input type="number" id="MATK-2-1" class="form-control" placeholder="MATK">
+      <span class="input-group-text">①</span>
+      <input type="number" id="Damege-2-1" class="form-control" placeholder="ダメージ" aria-label="Server">          
+    </div>
+    <p class="fw-bold fs-5">3.そのままアローでドーン!!!</p>
+    <div class="input-group mb-3">
+      <input type="number" id="Damege-3-1" class="form-control" placeholder="ダメージ1" >
+      <input type="number" id="Damege-3-2" class="form-control" placeholder="ダメージ2" >
+      <button type="button" id="ResetBtn" class="btn btn-primary">全てリセット</button>
+      <button type="button" id="GoBtn" class="btn btn-dark">再計算</button>
+    </div>
+  </div>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded",()=>{
+    class Interface_ValueSet{
+      Lv;
+      EnemyLv;
+      ATK1;
+      ATK2;
+      First_Damege1;
+      First_Damege2;
+      MATK;
+      Second_Damege;
+      Therd_Damege1;
+      Therd_Damege2;
+    }
+    class Checker{
+      DE = null;
+      MDEF = null;
+      Resist_Physical = null;
+      Resist_Magic = null;
+      
+      /**
+       * 要素から値の取得
+       * @return {Interface_Valueset}
+      */
+      Setting = ()=>{
+        const Result = new Interface_ValueSet();
+
+        Result.Lv = Judey.id('MyLevel').value || -1;
+        Result.EnemyLv = Judey.id('EnemyLevel').value || -1;
+        Result.ATK1 = Judey.id('ATK-1-1').value || -1;
+        Result.ATK2 = Judey.id('ATK-1-2').value || -1;
+        Result.First_Damege1 = Judey.id('Damege-1-1').value || -1;
+        Result.First_Damege2 = Judey.id('Damege-1-2').value || -1;
+        Result.MATK = Judey.id('MATK-2-1').value || -1;
+        Result.Second_Damege = Judey.id('Damege-2-1').value || -1;
+        Result.Therd_Damege1 = Judey.id('Damege-3-1').value || -1;
+        Result.Therd_Damege2 = Judey.id('Damege-3-2').value || -1;
+        
+        Object.keys(Result).forEach(Key=>Result[Key] = Number(Result[Key] ?? -1));
+        return Result;
+      };
+      /**
+      * @param Data{ Interface_ValueSet }
+      */
+      GetDEF = (Data)=>{
+        if(["Lv","EnemyLv","ATK1","ATK2","First_Damege1","First_Damege2"].every(Key=>Data[Key] !== -1) === false){
+          this.DEF = null;
+          this.Resist_Physical = null;
+          return false;
+        };
+
+        const Min = Math.min(Data.First_Damege1, Data.First_Damege2);
+        const Max = Math.max(Data.First_Damege1, Data.First_Damege2);
+        const MinATK  = Math.min(Data.ATK1, Data.ATK2);
+        const DamegeDiff = Math.abs(Data.First_Damege1 - Data.First_Damege2);
+        const ATKDiff = Math.abs(Data.ATK1 - Data.ATK2);
+        
+        this.Resist_Physical = ATKDiff - DamegeDiff;
+        this.DEF = Math.floor((MinATK + Data.Lv - Data.EnemyLv) * (100 - this.Resist_Physical) / 100 - Min);
+
+        return Data ;
+      };
+      /**
+      * @param Data{ Interface_ValueSet }
+      */
+      GetMDEF = (Data)=>{
+        if(!Data) return false;
+        if(["MATK","Second_Damege"].every(Key=>Data[Key] !== -1) === false){
+          this.MDEF = null;
+          return false;
+        };  
+
+        const BaseATK = (Data.ATK1 + Data.MATK / 2);
+        this.MDEF = Math.floor(Math.floor((BaseATK + Data.Lv - Data.EnemyLv) * (1 - this.Resist_Physical / 100)) - (Data.Second_Damege / 2 / 19));
+
+        return Data;
+      };
+      /**
+      * @param Data{ Interface_ValueSet }
+      */
+      GetResistMagic = (Data)=>{
+        if(!Data) return;
+        if(["Therd_Damege1","Therd_Damege2"].every(Key=>Data[Key] !== -1) === false){
+          this.Resist_Magic = null;
+          return false;
+        };  
+        this.Resist_Magic = null;
+        const AnsDamege = [Data.Therd_Damege1,Data.Therd_Damege2];
+        const Ans = [[],[]];
+
+        const BaseMATK = Data.MATK + Data.Lv - Data.EnemyLv;
+        const DamegeSet = {
+          BaseMATK : null,
+          SkillPower :1.25,
+          Stable:null,
+        };
+        
+        AnsDamege.forEach((NowDamege,Index)=>{
+          for(let resist = 0; resist <= 100; resist++){
+            DamegeSet.BaseMATK = BaseMATK * (1 - resist / 100) - this.MDEF + 50;
+
+            for(let i = 90; i <= 110 ; i++){
+              DamegeSet.Stable = i / 100;
+
+              const Damege = 
+                Object.values(DamegeSet).reduce((total, elem) => Math.floor(total * elem), 1);
+              
+              if(Math.abs(NowDamege - Damege) < 3){
+                Ans[Index].push(resist);
+                break;
+              }
+            }
+          };          
+        })
+
+        for(let i = 0; i < Ans[0].length; i++)
+          for(let y= 0; y < Ans[1].length; y++){
+            if(Ans[0][i] === Ans[1][y]){
+              if(this.Resist_Magic === null){
+                this.Resist_Magic = Ans[0][i];
+              }else{
+                this.Resist_Magic+= " / " + Ans[0][i];
+              }           
+            }
+          }
+
+        //this.Resist_Magic = null;
+      };
+      CalcToDisplay = ()=>{
+        const Data = this.Setting();
+        this.GetResistMagic(this.GetMDEF(this.GetDEF(Data)));
+
+        if(Number(this.DEF !== null)){
+          Judey.id('Res_DEF').innerText = `DEF：${this.DEF}`;
+          Judey.id('Res_Resist_Physical').innerText = `物理耐性：${this.Resist_Physical}%`;
+        };
+        if(Number(this.MDEF !== null)){
+          Judey.id('Res_MDEF').innerText = `MDEF：${this.MDEF}`;
+        };
+        if(this.Resist_Magic){
+          Judey.id('Res_Resist_Magic').innerText = `魔法耐性：${this.Resist_Magic}%`;
+        }
+      }
+      Reset = ()=>{
+        Judey.id('MyLevel').value = "";
+        Judey.id('EnemyLevel').value = "";
+        Judey.id('ATK-1-1').value = "";
+        Judey.id('ATK-1-2').value = "";
+        Judey.id('Damege-1-1').value = "";
+        Judey.id('Damege-1-2').value = "";
+        Judey.id('MATK-2-1').value = "";
+        Judey.id('Damege-2-1').value = "";
+        Judey.id('Damege-3-1').value = "";
+        Judey.id('Damege-3-2').value = "";
+        this.DEF = null;
+        this.MDEF = null;
+        this.Resist_Physical = null;
+        this.Resist_Magic = null;
+
+        Judey.id('Res_DEF').innerText = `DEF：`;
+        Judey.id('Res_Resist_Physical').innerText = `物理耐性：`;
+        Judey.id('Res_MDEF').innerText = `MDEF：`;
+        Judey.id('Res_Resist_Magic').innerText = `魔法耐性：`;
+      }
+    };
+    
+    const Work = new Checker();
+    Judey.$tag("input").Event("input",Work.CalcToDisplay);
+    Judey.$id("GoBtn").Event("click",Work.CalcToDisplay);
+    Judey.$id("ResetBtn").Event("click",Work.Reset);
+  })
+</script>
+</html>

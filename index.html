@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="ja" class="">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="description" content="トーラムオンラインのダメージ計算シミュレータです。手入力による計算、クリスタ等選択による半自動計算に対応しています。" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@azukitrm" />
+    <meta property="og:title" content="ダメージ計算シミュレータ" />
+    <meta property="og:description" content="主にダメージ計算が行えます。" />
+    <meta property="og:image" content="https://tkazuki.net/v.png" />
+    <meta property="og:url" content="https://tkazuki.net/toram/damegechecker/" />
+    	
+    <link rel="apple-touch-icon" href="https://tkazuki.net/icon.png" sizes="180x180" />
+    <title>トーラム ダメージ計算シミュレータ</title>
+    <link rel="canonical" href="https://tkazuki.net/toram/damegechecker/" />
+<!--     <link rel="stylesheet" href="CSS/Main3.min.css?ver=1.90" />
+    <link rel="stylesheet" href="CSS/AnotherSys.css?ver=1.11" />
+    <script src="JS/Judey.min.js?ver=1.20" defer></script>
+    <script src="JS/Main.min.js?ver=1.221" defer></script> -->
+    <link rel="stylesheet" href="CSS/Main3.css" />
+    <link rel="stylesheet" href="CSS/AnotherSys.css" />
+    <script src="JS/Judey.js" defer></script>
+    <script src="JS/Main.js" defer></script>
+</head>
+<body>
+    <form name="form1" id="form1">
+        <header class="Header">
+            <h1 class="H1">トーラムダメージ計算</h1>
+            <p class="Header_P">
+                主にダメージ計算が行えるシミュレータです。
+            </p>
+        </header>
+        <ul class="PreviewList List Flex">
+            <li class="W50 Preview" data-value="Damege">
+                <span>与ダメージ確認</span>
+            </li>
+            <li class="W50 Preview" data-value="Status">
+                <span>ステータス確認</span>
+            </li>
+        </ul>
+        <!-- Main_ダメージ表示 -->
+        <div class="PreviewWindows Preview_Damege NoneText">
+            <div class="CenterElems">
+                <div class="ExpectedDameges NoneText">
+                    <div class="ExpectedDamege">
+                        <p class="ExpectedText Expected_ValueText">期待値</br>
+                            <span class="Expected_Value"></span>
+                        </p>
+                        <p class="ExpectedText Expected_StableText">平均安定率</br>
+                            <span class="Expected_Stable"></span>
+                        </p>
+                        <p class="ExpectedText Expected_RateText">威力発揮率</br>
+                            <span class="Expected_Rate"></span>
+                        </p>
+                    </div>   
+                    <div class="ExpectedItem NoneText" data-value="input">
+                        <p class="Expected_InfoText">※複数HITの場合、表示は全ての平均値になります。</p>
+                        <p class="ExpectedBase_TopInfo">
+                            1.クリティカル発生率...
+                            <span class="ExpectedBase_PreviewInfo" data-type="Critical">100%</span>
+                        </p>
+                        <p class="ExpectedBase_SubInfo">
+                            ◎自身のクリティカル率：
+                            <span class="ExpectedBase_PreviewInfo" data-type="MyCritical">100</span>
+                        </p>
+                        <p class="ExpectedBase_SubInfo">
+                            ◎クリティカル発生率100%に必要なクリティカル率：
+                            <span class="ExpectedBase_PreviewInfo" data-type="EnemyCritical">130</span>
+                        </p>
+                        <p class="ExpectedBase_SubInfo">※確定クリティカル特性の場合は、クリティカル発生率100%になります。</p>    
+                        <p class="ExpectedBase_TopInfo">
+                            2.命中率...
+                            <span class="ExpectedBase_PreviewInfo" data-type="Hit">100%</span>
+                        </p>
+                        <p class="ExpectedBase_SubInfo">
+                            ◎自身のHIT値：
+                            <span class="ExpectedBase_PreviewInfo" data-type="MyHit">100</span>
+                        </p>
+                        <p class="ExpectedBase_SubInfo">
+                            ◎命中率100%に必要なHIT値：
+                            <span class="ExpectedBase_PreviewInfo" data-type="EnemyFree">130</span>
+                        </p>
+                        <p class="ExpectedBase_SubInfo">※魔法/必中特性の場合は、命中率100%になります。</p>                       
+                    </div>              
+                    <div class="ExpectedItem NoneText" data-value="graph">
+                        <div class="ExpectedRateGraphs">
+                            <p class="Expected_InfoText">※複数HITの場合、表示は全ての平均値になります。</p>
+                            <p class="Expected_InfoText">※コンボスキルの場合、事前設定のヒット判定を無視します。</p>
+                            <p class="Expected_InfoText">※保障HIT、絶対命中は含まれません。</p>
+                            <p>発生割合(％)</p>
+                            <div class="ExpectedRateGraph Flex">
+                                <i class="ExRate_Critical Critical"></i>
+                                <i class="ExRate_Glaze Glaze"></i>
+                                <i class="ExRate_Nomal Nomal"></i>
+                                <i class="ExRate_Miss Miss"></i>
+                            </div>
+                            <div class="ExpectedRateGraph_RateText Flex">
+                                <span>0</span>
+                                <span>25</span>
+                                <span>50</span>
+                                <span>75</span>
+                                <span>100</span>
+                            </div>
+                            <p>与ダメージ割合(％)</p>
+                            <div class="ExpectedRateGraph Flex">
+                                <i class="ExDamege_Critical Critical"></i>
+                                <i class="ExDamege_Glaze Glaze"></i>
+                                <i class="ExDamege_Nomal Nomal"></i>
+                            </div>
+                            <div class="ExpectedRateGraph_RateText Flex">
+                                <span>0</span>
+                                <span>25</span>
+                                <span>50</span>
+                                <span>75</span>
+                                <span>100</span>
+                            </div>
+                        </div>                        
+                        <div class="ExpectedRateGraph_Reference">
+                            <div class="ExpectedRateGraph_ReferenceColors Critical"></div>
+                            <span>Critical</span>
+                        </div>
+                        <div class="ExpectedRateGraph_Reference">
+                            <div class="ExpectedRateGraph_ReferenceColors Glaze"></div>
+                            <span>Glaze</span>
+                        </div>
+                        <div class="ExpectedRateGraph_Reference">
+                            <div class="ExpectedRateGraph_ReferenceColors Nomal"></div>
+                            <span>白ダメ</span>
+                        </div>
+                        <div class="ExpectedRateGraph_Reference">
+                            <div class="ExpectedRateGraph_ReferenceColors Miss"></div>
+                            <span>ミス</span>
+                        </div>
+                    </div>
+                    <div class="ExpectedItem NoneText" data-value="archive">
+                        <button type="button" class="ExpectedArchive">キャプチャ</button>
+                        <div class="ExpectedDamege">
+                            <p class="ExpectedText Expected_ValueText">期待値</br>
+                                <span class="Expected_Value_Archive">0</span>
+                            </p>
+                            <p class="ExpectedText Expected_StableText">平均安定率</br>
+                                <span class="Expected_Stable_Archive">0%</span>
+                            </p>
+                            <p class="ExpectedText Expected_RateText">威力発揮率</br>
+                                <span class="Expected_Rate_Archive">0%</span>
+                            </p>
+                        </div>
+                    </div>
+                    <ul class="List Flex ExpectedListItems">
+                        <li data-value="input" class="ExpectedListItem">基本情報</li>
+                        <li data-value="graph" class="ExpectedListItem">割合表示</li>
+                        <li data-value="archive" class="ExpectedListItem">一時記録</li>
+                        <li data-value="comparsion" class="ExpectedListItem">比較設定</li>
+                    </ul> 
+                </div>
+                <table class="DamegeTD">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="DamegeTitles">現在装備</th>
+                            <th></th>
+                            <th class="DamegeTitles"><div id="CapcherTitle">キャプチャ➤</div></th>
+                            <th><div id="SetComparison">比較➤</div></th>
+                        </tr>
+                        <tr>
+                            <th class="DamegeTD_ItemCol"></th>
+                            <th class="DamegeTD_DamegeCol">ダメージ</th>
+                            <th class="DamegeTD_StableCol">安定率</th>
+                            <th class="DamegeTD_DamegeCol">ダメージ</th>
+                            <th class="DamegeTD_StableCol">安定率</th>
+                        </tr>
+                    </thead>
+                    <tbody class="TRight">
+                        <tr>
+                            <td class="DamegeTD_Under">最小</td>
+                            <td id="Damege_Min" class="DamegeTD_Under">0</td>
+                            <td id="Damege_Min_Stable" class="DamegeTD_Under">5%</td>
+                            <td id="Damege_Min_Archive" class="DamegeTD_Under">0</td>
+                            <td id="Damege_Min_Stable_Archive" class="DamegeTD_Under">5%</td>
+                        </tr>
+                        <tr>
+                            <td class="DamegeTD_Under">最大</td>
+                            <td id="Damege_Max" class="DamegeTD_Under">4</td>
+                            <td id="Damege_Max_Stable" class="DamegeTD_Under">100%</td>
+                            <td id="Damege_Max_Archive" class="DamegeTD_Under">4</td>
+                            <td id="Damege_Max_Stable_Archive" class="DamegeTD_Under">100%</td>
+                        </tr>
+                        <tr>
+                            <td class="DamegeTD_Under">平均</td>
+                            <td id="Damege_Ave" class="DamegeTD_Under">1</td>
+                            <td id="Damege_Ave_Stable" class="DamegeTD_Under">52%</td>
+                            <td id="Damege_Ave_Archive" class="DamegeTD_Under">1</td>
+                            <td id="Damege_Ave_Stable_Archive" class="DamegeTD_Under">52%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="ComparisonInfoFrame" class="Flex">
+                    <span id="ComparisonInfo">条件適用後のダメージ変動(平均)：</span>         
+                    <span id="ComparisonInfoResult" style="color: var(--RedGrad3);">1,000(+1%)</span>
+                    <button type="button" id="ComparisonResultParamCheckBtn">？</button>
+                </div>
+                <div class="W100 Top-Btm5 Flex ComboHides ComboHide_Torauma">
+                    <p class="ToraumaTexts">
+                        <span>慣れ倍率：</span>
+                        <span id="ToraumaRate_Text">100%</span>
+                    </p>
+                    <input id="ToraumaRate" class="ToraumaSet" type="range" min="50" max="250" step="1" value="100">
+                    <input type="number" class="ToraumaSet ToraumaNum" data-kouho="50,100,150,250" min="50" max="250" step="1" value="100">
+                    <p>
+                        慣れ倍率の値は最小50％から最大250％の範囲で変更できます。
+                    </p>                    
+                </div>
+                <p class="EnemyAttributeText_Enemy">敵：ラフィ</p>
+                <p class="EnemyAttributeText NoneText" style="color: red;">※この敵は属性覚醒の有利+25%が適用されません。</p>
+                <p class="ComboInfoText NoneText">※一部の設定値はコンボの内容が適用されます。</p>
+                <ul class="List Flex Top-Btm5 W100">
+                    <li class="OptionSelector SelectorList OptActive" data-value="opt1">威力オプション</li>
+<!--                     <li class="OptionSelector SelectorList" data-value="opt2">バフスキル(PT)</li>
+                    <li class="OptionSelector SelectorList" data-value="opt3">バフスキル</li> -->
+                    <li class="OptionSelector SelectorList" data-value="opt4">その他</li>
+                </ul>
+                <!-- Sub_威力オプション -->
+                <div id="OptionItems_opt1" class="W100 OptionItems">
+                    <p class="OptionInfoText">オプション名クリックで効果を確認できます。</p>
+                    <div class="RADIOSET ChargeInfo NoneText">
+                        <span class="ChargeInfo_Text OptionSelector_Text">チャージ数</span>
+                        <input type="number" value="" min="" max="" class="ChargeInfo_Input">
+                        <span class="ChargeInfo_NumRangeInfo">適用値:1-50%</span>
+                    </div>  
+
+                    <div class="RADIOSET">
+                        <span class="OptionSelector_Text" data-key="boss">ボス戦難易度</span>
+                        <input type="radio" id="diff1" class="InputOption _radio" name="diff" value="IsDifficulty-nomal"
+                            checked>
+                        <label for="diff1" class="_label _hydrangea">Normal</label>
+                        <input type="radio" id="diff2" class="InputOption _radio" name="diff" value="IsDifficulty-hard">
+                        <label for="diff2" class="_label _chartreuse">Hard</label>
+                        <input type="radio" id="diff3" class="InputOption _radio" name="diff" value="IsDifficulty-luna">
+                        <label for="diff3" class="_label _pinkgold">Lunatic</label>
+                        <input type="radio" id="diff4" class="InputOption _radio" name="diff" value="IsDifficulty-ulti">
+                        <label for="diff4" class="_label _cherry">Ultimate</label>
+                    </div>
+                    <p class="OptionInfoChildText NoneText" data-key="boss">
+                        ボス戦時の難易度を設定します。<br>
+                        ※選択した敵がボス以外の場合、変更しても効果はありません。
+                    </p>
+                    
+                    <div class="RADIOSET RaidWepon">
+                        <span class="OptionSelector_Text" data-key="raidwepon">レイド強化武器</span>
+                        <input type="radio" id="raidwepon1" class="InputOption _radio" name="raidwepon" value="IsRaidWepon-On">
+                        <label for="raidwepon1" class="_label _cherry">〇</label>
+                        <input type="radio" id="raidwepon2" class="InputOption _radio" name="raidwepon" value="IsRaidWepon-Off" checked>
+                        <label for="raidwepon2" class="_label _gray">×</label>
+                    </div>
+                    <p class="OptionInfoChildText NoneText" data-key="raidwepon">
+                        レイド戦の特性で武器がダメージ増加武器かを設定します。<br>
+                        ※敵の設定がレイドボス以外の場合は変更しても効果はありません。
+                    </p>
+
+                    <div class="RADIOSET SkillDamegePointSelector">
+                        <span class="OptionSelector_Text" data-key="skill">スキルダメージ</span>
+                        <input type="radio" id="skl1" class="InputOption _radio" name="skill" value="IsShowDamage-All"
+                            checked>
+                        <label for="skl1" class="_label _hydrangea">全て</label>
+                        <input type="radio" id="skl2" class="InputOption _radio" name="skill"
+                            value="IsShowDamage-First">
+                        <label for="skl2" class="_label _hydrangea">1撃目</label>
+                        <input type="radio" id="skl3" class="InputOption _radio" name="skill"
+                            value="IsShowDamage-Second">
+                        <label for="skl3" class="_label _hydrangea">2撃目</label>
+                        <input type="radio" id="skl4" class="InputOption _radio" name="skill"
+                            value="IsShowDamage-Therd">
+                        <label for="skl4" class="_label _hydrangea">3撃目</label>
+                    </div>
+                    <div class="RADIOSET SkillDamegePointSelector ExpantionSkillDamegePointSelector">
+                        <span class="OptionSelector_Text" data-key="skill"></span>
+                        <input type="radio" id="skl5" class="InputOption _radio" name="skill" value="IsShowDamage-Fourth"
+                            checked>
+                        <label for="skl5" class="_label _hydrangea">4撃目</label>
+                        <input type="radio" id="skl6" class="InputOption _radio" name="skill"
+                            value="IsShowDamage-Fifth">
+                        <label for="skl6" class="_label _hydrangea">5撃目</label>
+                        <input type="radio" id="skl7" class="InputOption _radio" name="skill"
+                            value="IsShowDamage-Sixth">
+                        <label for="skl7" class="_label _hydrangea">6撃目</label>
+                        <input type="radio" id="skl8" class="InputOption _radio" name="skill"
+                            value="IsShowDamage-Seventh">
+                        <label for="skl8" class="_label _hydrangea">7撃目</label>
+                    </div>
+                    <p class="OptionInfoChildText NoneText" data-key="skill">
+                        表示するダメージを設定します。<br>
+                        〇撃目を指定した場合は単発表示となります。
+                    </p>
+                    <div class="RADIOSET ComboHides ComboHide_IsWeponAttribute">
+                        <span class="OptionSelector_Text" data-key="weponattribute">属性攻撃</span>
+                        <input type="radio" id="wepattr1" class="InputOption
+								_radio" name="wepattr" value="IsWeponAttribute-On">
+                        <label for="wepattr1" class="_label _pinkgold">有(有利)</label>
+                        <input type="radio" id="wepattr2" class="InputOption
+                            _radio" name="wepattr" value="IsWeponAttribute-Other">
+                        <label for="wepattr2" class="_label _bluehawaii">有(その他)</label>
+                        <input type="radio" id="wepattr3" class="InputOption
+								_radio" name="wepattr" value="IsWeponAttribute-Off" checked>
+                        <label for="wepattr3" class="_label _gray">無</label>
+                        <input type="radio" id="wepattr4" class="InputOption
+                        _radio" name="wepattr" value="IsWeponAttribute-Bad">
+                        <label for="wepattr4" class="_label _hydrangea">不利属性</label>
+                    </div>
+                    <p class="OptionInfoChildText NoneText" data-key="weponattribute">
+                        スキルが敵に対して有利な属性か否か、または無属性かを設定します。<br>
+                        ・有利属性の場合、25%の属性有利が加算されます。<br>
+                        ・魔法かつ有利属性の場合、更に基礎INT/10%の属性有利が加算されます。<br>
+                        ※杖またはメイン魔道具の場合は、無属性攻撃以外でも加算されます。<br>
+                        またスキル自体に属性が付与されている場合以下の扱いとなります。<br>
+                        ・無属性：『無属性』以外を選択した場合でも無属性扱いとなります。<br>
+                        ・無属性以外：『無属性』を選択した場合、『その他有利』扱いとなります。<br>
+                        ※敵の属性が無属性の場合は、覚醒有利ボーナスの+25%は適用されません。
+                    </p>
+                    <div class="RADIOSET ComboHides ComboHide_IsStrong">
+                        <span class="OptionSelector_Text" data-key="isstrong">コンボ：強打</span>
+                        <input type="radio" id="stg1" class="InputOption _radio" name="strong" value="IsStrong-On"
+                            checked>
+                        <label for="stg1" class="_label _cherry">有効</label>
+                        <input type="radio" id="stg2" class="InputOption _radio" name="strong" value="IsStrong-Off">
+                        <label for="stg2" class="_label _gray">無効</label>
+                    </div>
+                    <p class="OptionInfoChildText NoneText" data-key="isstrong">
+                        コンボ効果が『強打』かそれ以外かを設定します。<br>
+                        『強打』選択の場合、『無の構え』は適用されなくなります。
+                    </p>
+                    <div class="RADIOSET "><!-- ComboHides ComboHide_IsCritical -->
+                        <span class="OptionSelector_Text" data-key="damege">ダメージ判定</span>
+                        <input type="radio" id="cri1" class="InputOption ExpectedOption _radio" name="critical"
+                            value="IsCritical-Critical" checked>
+                        <label for="cri1" class="_label _critical">Critical</label>
+                        <input type="radio" id="cri2" class="InputOption ExpectedOption _radio" name="critical"
+                            value="IsCritical-Glaze">
+                        <label for="cri2" class="_label _gray">Graze</label>
+                        <input type="radio" id="cri3" class="InputOption ExpectedOption _radio" name="critical"
+                            value="IsCritical-base">
+                        <label for="cri3" class="_label _white">白ダメ</label>
+                        <input type="radio" id="cri4" class="ExpectedOption _radio" name="critical" value="IsExpectedShow-On">
+                        <label for="cri4" class="_label _bluehawaii">期待値</label>
+                    </div>
+                    <p class="OptionInfoChildText NoneText" data-key="damege">
+                        スキルの命中判定を設定します。<br>
+                        スキル自体に特性が付与されている場合、以下の扱いとなります。<br>
+                        ・魔法スキル：『Glaze』選択時、『Critical』扱いとなります。※Glaze無効<br>
+                        ・必中：『Glaze』選択時、『Critical』扱いとなります。<br>
+                        ・確定クリティカル：『白ダメ』選択時、『Critical』扱いとなります。<br>
+                        『期待値』を設定した場合はダメージ表示形式が切り替わります。
+                    </p>
+                    <div class="RADIOSET">
+                        <span class="OptionSelector_Text" data-key="distance">距離判定</span>
+                        <input type="radio" id="dis1" class="InputOption _radio" name="distance"
+                            value="IsDistance-short" checked>
+                        <label for="dis1" class="_label _cherry">近距離</label>
+                        <input type="radio" id="dis2" class="InputOption _radio" name="distance"
+                            value="IsDistance-long">
+                        <label for="dis2" class="_label _bluehawaii">遠距離</label>
+                        <input type="radio" id="dis3" class="InputOption _radio" name="distance"
+                            value="IsDistance-none">
+                        <label for="dis3" class="_label _gray">無効化</label>
+                    </div>
+                    <p class="OptionInfoChildText NoneText" data-key="distance">
+                        スキルを当てた時の距離判定を設定します。<br>
+                        ・『近距離』：近距離威力のみを適用します。<br>
+                        ・『遠距離』：遠距離威力のみを適用します。<br>
+                        ・『無効化』：距離威力を適用しません。<br>
+                        スキル自体に距離威力無効が付与されている場合は、<br>
+                        選択内容に関わらず無効化扱いとなります。
+                    </p>
+                    <div class="RADIOSET">
+                        <span class="OptionSelector_Text" data-key="attribute">属性威力</span>
+                        <input type="radio" id="attr1" class="InputOption _radio" name="attribute"
+                            value="IsAttribute-On" checked>
+                        <label for="attr1" class="_label _cherry">有効</label>
+                        <input type="radio" id="attr2" class="InputOption _radio" name="attribute"
+                            value="IsAttribute-Attribute">
+                        <label for="attr2" class="_label _pinkgold">有利のみ</label>
+                        <input type="radio" id="attr3" class="InputOption _radio" name="attribute"
+                            value="IsAttribute-Awake">
+                        <label for="attr3" class="_label _hydrangea">覚醒のみ</label>                       
+                        <input type="radio" id="attr4" class="InputOption _radio" name="attribute"
+                            value="IsAttribute-Off">
+                        <label for="attr4" class="_label _gray">無効</label>
+                    </div>
+                    <p class="OptionInfoChildText NoneText" data-key="attribute">
+                        意図的に属性威力を制限させたい場合に『有効』以外を設定します。<br>
+                        ・『有利のみ』：装備品、スキルの属性有利のみを適用します。<br>
+                        ・『覚醒のみ』：『属性攻撃』オプションの属性有利のみを適用します。<br>
+                        ・『無効』：すべての属性有利を無効化します。
+                    </p>
+                    <div class="RADIOSET">
+                        <span class="OptionSelector_Text" data-key="swordpower">抜刀威力</span>
+                        <input type="radio" id="swp1" class="InputOption _radio" name="swordpower"
+                            value="IsSwordPower-On" checked>
+                        <label for="swp1" class="_label _cherry">有効</label>
+                        <input type="radio" id="swp2" class="InputOption _radio" name="swordpower"
+                            value="IsSwordPower-Off">
+                        <label for="swp2" class="_label _gray">無効</label>
+                    </div>
+                    <p class="OptionInfoChildText NoneText" data-key="swordpower">
+                        意図的に抜刀威力を制限したい場合に『有効』以外を設定します。<br>
+                        スキル自体に抜刀威力無効が付与されている場合は、<br>
+                        選択内容に関わらず無効扱いとなります。
+                    </p>                        
+                </div>
+                <!-- Sub_パーティー強化スキル -->
+                <div id="OptionItems_opt2" class="W100 OptionItems NoneText">
+                </div>
+                <!-- Sub_自己強化スキル -->
+                <div id="OptionItems_opt3" class="W100 OptionItems NoneText">
+                </div>
+                <!-- Sub_その他のスキル -->
+                <div id="OptionItems_opt4" class="W100 OptionItems NoneText">
+                    <div class="RADIOSET">
+                        <span class="OptionSelector_Text">敵状態異常:破壊</span>
+                        <input type="radio" id="break1" class="InputOption _radio" name="break" value="IsBreaker-On">
+                        <label for="break1" class="_label _cherry">付与</label>
+                        <input type="radio" id="break2" class="InputOption _radio" name="break" value="IsBreaker-Off"
+                            checked>
+                        <label for="break2" class="_label _gray">なし</label>
+                    </div>
+                    <div class="RADIOSET">
+                        <span class="OptionSelector_Text">敵状態異常:衰弱</span>
+                        <input type="radio" id="breakdown1" class="InputOption _radio" name="breakdown"
+                            value="IsBreakDown-On">
+                        <label for="breakdown1" class="_label _cherry">付与</label>
+                        <input type="radio" id="breakdown2" class="InputOption _radio" name="breakdown"
+                            value="IsBreakDown-Off" checked>
+                        <label for="breakdown2" class="_label _gray">なし</label>
+                    </div>
+                    <div class="RADIOSET">
+                        <span class="OptionSelector_Text">敵状態異常:暗闇</span>
+                        <input type="radio" id="darkness1" class="InputOption _radio" name="darkness"
+                            value="IsDarkness-On">
+                        <label for="darkness1" class="_label _cherry">付与</label>
+                        <input type="radio" id="darkness2" class="InputOption _radio" name="darkness"
+                            value="IsDarkness-Off" checked>
+                        <label for="darkness2" class="_label _gray">なし</label>
+                    </div>
+                    <div class="RADIOSET">
+                        <span class="OptionSelector_Text">スキル:強打</span>
+                        <input type="radio" id="stonger1" class="InputOption _radio" name="isstronger"
+                            value="IsStronger-On">
+                        <label for="stonger1" class="_label _cherry">発動</label>
+                        <input type="radio" id="stonger2" class="InputOption _radio" name="isstronger"
+                            value="IsStronger-Off" checked>
+                        <label for="stonger2" class="_label _gray">未発動</label>
+                    </div>
+                    <div class="RADIOSET">
+                        <span class="OptionSelector_Text">スキル:集中</span>
+                        <input type="radio" id="stongermagic1" class="InputOption _radio" name="isstrongermagic"
+                            value="IsStrongerMagic-On">
+                        <label for="stongermagic1" class="_label _cherry">発動</label>
+                        <input type="radio" id="stongermagic2" class="InputOption _radio" name="isstrongermagic"
+                            value="IsStrongerMagic-Off" checked>
+                        <label for="stongermagic2" class="_label _gray">未発動</label>
+                    </div>
+                    <div class="RADIOSET">
+                        <span class="OptionSelector_Text">パッシブ倍率(+%)</span>
+                        <div class="DamegeRateSelectorArea NoneText" data-key="PassiveRate">
+                            <input type="number" value="0" min="-1000" max="1000" class="SelectorRateInput" data-info="PassiveRate">
+                        </div>
+                        <input type="radio" id="SelectorPassiveRate1" class="SelectorRate _radio" name="selectorpassiverate"
+                            value="1" data-key="PassiveRate">
+                        <label for="SelectorPassiveRate1" data-key="PassiveRate" data-value="1" class="_label _cherry">手動入力</label>
+                        <input type="radio" id="SelectorPassiveRate2" class="SelectorRate _radio" name="selectorpassiverate"
+                            value="0" data-key="PassiveRate" checked>
+                        <label for="SelectorPassiveRate2" data-key="PassiveRate" data-value="0" class="_label _hydrangea">自動計算</label>
+                        <p class="OptionSelector_InfoText SelectorRateInfo" data-key="PassiveRate">倍率:0%</p>
+                        <p class="OptionSelector_InfoText NoneText" data-key="PassiveRate">※セーブされません。</p>
+                    </div>
+                    <div class="RADIOSET">
+                        <span class="OptionSelector_Text">ブレイブ倍率(+%)</span>
+                        <div class="DamegeRateSelectorArea NoneText" data-key="BraveRate">
+                            <input type="number" value="0" min="-1000" max="1000" class="SelectorRateInput" data-info="BraveRate" >
+                        </div>
+                        <input type="radio" id="SelectorBraveRate1" class="SelectorRate _radio" name="selectorbraverate"
+                            value="1" data-key="BraveRate">
+                        <label for="SelectorBraveRate1" data-key="BraveRate" data-value="1" class="_label _cherry">手動入力</label>
+                        <input type="radio" id="SelectorBraveRate2" class="SelectorRate _radio" name="selectorbraverate"
+                            value="0" data-key="BraveRate" checked>
+                        <label for="SelectorBraveRate2" data-key="BraveRate" data-value="0" class="_label _hydrangea">自動計算</label>
+                        <p class="OptionSelector_InfoText SelectorRateInfo" data-key="BraveRate">倍率:0%</p>
+                        <p class="OptionSelector_InfoText NoneText" data-key="BraveRate">※セーブされません。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main_合計ステータス表示 -->
+        <div class="PreviewWindows Preview_Status NoneText">
+            <div class="CenterElems ShowStatusSelectorSet">
+                <ul class="List Flex Top-Btm5 W95">
+                    <li class="ShowStatusSelector SelectorList ShowStatus" data-value="0">基本ステータス</li>
+                    <li class="ShowStatusSelector SelectorList" data-value="1">補正後ステータス</li>
+                    <li class="ShowStatusSelector SelectorList" data-value="2">装備品補正値1</li>
+                </ul>
+                <ul class="List Flex Top-Btm5 W95">
+                    <li class="ShowStatusSelector SelectorList" data-value="3">装備品補正値2</li>
+                    <li class="ShowStatusSelector SelectorList" data-value="4">装備品補正値3</li>
+                </ul>
+            </div>
+            <div class="HeightSelectorSet NoneText">
+                <span>ウィンドウ高さ</span>
+                <select name="" id="HeightSelector">
+                    <option value="0">デフォルト</option>
+                    <option value="1">中</option>
+                    <option value="2">中低</option>
+                    <option value="3">低</option>
+                </select>
+            </div>
+            <!-- ステータス -->
+            <div class="StatusSet Flex">
+                <div id="StatusSet_Status" class="StatusSet_Items">
+                    <div class="Flex" style="justify-content:space-between;">
+                        <h3 class="PreviewStatus_Text" style="display: inline-block;">基本ステータス</h3>
+                        <span class="PreviewStatusSelector">ベース</span>                       
+                    </div>
+                </div>
+                <div id="StatusSet_SelectionStatus" class="StatusSet_Items NoneText">
+                    <h3 class="PreviewStatus_Text">補正後ステータス</h3>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">STR</span>
+                        <span data-id="TotalStatus-STR_After" class="StatusValue">1</span>
+                        <span class="StatusText">AGI</span>
+                        <span data-id="TotalStatus-AGI_After" class="StatusValue">1</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">INT</span>
+                        <span data-id="TotalStatus-INT_After" class="StatusValue">1</span>
+                        <span class="StatusText">DEX</span>
+                        <span data-id="TotalStatus-DEX_After" class="StatusValue">1</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">VIT</span>
+                        <span data-id="TotalStatus-VIT_After" class="StatusValue">1</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">CRT</span>
+                        <span data-id="TotalStatus-CRT" class="StatusValue">1</span>
+                        <span class="StatusText">MEN</span>
+                        <span data-id="TotalStatus-MEN" class="StatusValue">1</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">TEC</span>
+                        <span data-id="TotalStatus-TEC" class="StatusValue">1</span>
+                    </div>
+                </div>
+                <div id="StatusSet_Attribute1" class="StatusSet_Items NoneText">
+                    <h3 class="PreviewStatus_Text">装備品補正値1</h3>
+                    <select name="showattributestatusselector" id="ShowAttributeStatusSelector1" class="ShowAttributeStatusSelector">
+                        <option value="All">全ての合計値</option>
+                        <option value="Wepon">メイン装備</option>
+                        <option value="SubWepon">サブ装備</option>
+                        <option value="Armor">体装備</option>
+                        <option value="Addition">追加装備</option>
+                        <option value="Option">特殊装備</option>
+                        <option value="Enchant">エンチャント</option>
+                        <option value="Other">自由入力欄1</option>
+                        <option value="Other2">自由入力欄2</option>
+                        <option value="Other3">自由入力欄3</option>
+                        <option value="Othe4">自由入力欄4</option>
+                        <option value="Other5">自由入力欄5</option>
+                        <option value="Other6">自由入力欄6</option>
+                        <option value="Other7">自由入力欄7</option>
+                        <option value="Crystal">クリスタ</option>
+                        <option value="Cooking">料理</option>
+                        <option value="ItemBuff">アイテムバフ</option>
+                        <option value="PartialAll">スキルバフ(一部のみ)</option>
+                    </select>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText"></span>
+                        <span class="StatusValue">%</span>
+                        <span class="StatusValue">+</span>
+                        <span class="StatusText"></span>
+                        <span class="StatusValue">%</span>
+                        <span class="StatusValue">+</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">ATK</span>
+                        <span data-id="All-ATK_Rate" class="StatusValue">0</span>
+                        <span data-id="All-ATK" class="StatusValue">0</span>
+                        <span class="StatusText">物理貫通</span>
+                        <span data-id="All-ATKPenetrate" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">MATK</span>
+                        <span data-id="All-MATK_Rate" class="StatusValue">0</span>
+                        <span data-id="All-MATK" class="StatusValue">0</span>
+                        <span class="StatusText">魔法貫通</span>
+                        <span data-id="All-MATKPenetrate" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">武器ATK</span>
+                        <span data-id="All-WeponATK_Rate" class="StatusValue">0</span>
+                        <span data-id="All-WeponATK" class="StatusValue">0</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">属性威力</span>
+                        <span data-id="All-Attribute" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">抜刀威力</span>
+                        <span data-id="All-SwordPower_Rate" class="StatusValue">0</span>
+                        <span data-id="All-SwordPower" class="StatusValue">0</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">近距離威力</span>
+                        <span data-id="All-Distance" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">遠距離威力</span>
+                        <span data-id="All-LongDistance" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">ｸﾘﾃｨｶﾙﾀﾞﾒｰｼﾞ</span>
+                        <span data-id="All-CriticalDamege_Rate" class="StatusValue">0</span>
+                        <span data-id="All-CriticalDamege" class="StatusValue">0</span>
+                        <span class="StatusText">ｸﾘﾃｨｶﾙ率</span>
+                        <span data-id="All-Critical_Rate" class="StatusValue">0</span>
+                        <span data-id="All-Critical" class="StatusValue">0</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">STR</span>
+                        <span data-id="All-STR_Rate" class="StatusValue">0</span>
+                        <span data-id="All-STR" class="StatusValue">0</span>
+                        <span class="StatusText">AGI</span>
+                        <span data-id="All-AGI_Rate" class="StatusValue">0</span>
+                        <span data-id="All-AGI" class="StatusValue">0</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">INT</span>
+                        <span data-id="All-INT_Rate" class="StatusValue">0</span>
+                        <span data-id="All-INT" class="StatusValue">0</span>
+                        <span class="StatusText">DEX</span>
+                        <span data-id="All-DEX_Rate" class="StatusValue">0</span>
+                        <span data-id="All-DEX" class="StatusValue">0</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">VIT</span>
+                        <span data-id="All-VIT_Rate" class="StatusValue">0</span>
+                        <span data-id="All-VIT" class="StatusValue">0</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">ASPD</span>
+                        <span data-id="All-ASPD_Rate" class="StatusValue">0</span>
+                        <span data-id="All-ASPD" class="StatusValue">0</span>
+                        <span class="StatusText">CSPD</span>
+                        <span data-id="All-CSPD_Rate" class="StatusValue">0</span>
+                        <span data-id="All-CSPD" class="StatusValue">0</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">安定率</span>
+                        <span data-id="All-Stable" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">行動速度</span>
+                        <span data-id="All-SPD" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">命中</span>
+                        <span data-id="All-HIT_Rate" class="StatusValue">0</span>
+                        <span data-id="All-HIT" class="StatusValue">0</span>
+                        <span class="StatusText">回避</span>
+                        <span data-id="All-FREE_Rate" class="StatusValue">0</span>
+                        <span data-id="All-FREE" class="StatusValue">0</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">MP</span>
+                        <span class="StatusValue">-</span>
+                        <span data-id="All-MP" class="StatusValue">0</span>
+                        <span class="StatusText">攻撃MP回復</span>
+                        <span data-id="All-MPRecovery_Rate" class="StatusValue">0</span>
+                        <span data-id="All-MPRecovery" class="StatusValue">0</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">HP</span>
+                        <span data-id="All-HP_Rate" class="StatusValue">0</span>
+                        <span data-id="All-HP" class="StatusValue">0</span>
+                        <span class="StatusText">異常耐性</span>
+                        <span data-id="All-Resist_Health" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">物理耐性</span>
+                        <span data-id="All-Resist_Physical" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">魔法耐性</span>
+                        <span data-id="All-Resist_Magic" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">ヘイト+</span>
+                        <span data-id="All-Hate" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">ヘイト-</span>
+                        <span data-id="All-HateLittle" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                </div>
+                <div id="StatusSet_Attribute2" class="StatusSet_Items NoneText">
+                    <h3 class="PreviewStatus_Text">装備品補正値2</h3>
+                    <select name="showattributestatusselector" class="ShowAttributeStatusSelector">
+                        <option value="All">全ての合計値</option>
+                        <option value="Wepon">メイン装備</option>
+                        <option value="SubWepon">サブ装備</option>
+                        <option value="Armor">体装備</option>
+                        <option value="Addition">追加装備</option>
+                        <option value="Option">特殊装備</option>
+                        <option value="Enchant">エンチャント</option>
+                        <option value="Other">自由入力欄1</option>
+                        <option value="Other2">自由入力欄2</option>
+                        <option value="Other3">自由入力欄3</option>
+                        <option value="Crystal">クリスタ</option>
+                        <option value="Cooking">料理</option>
+                        <option value="ItemBuff">アイテムバフ</option>
+                        <option value="PartialAll">スキルバフ(一部のみ)</option>
+                    </select>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText"></span>
+                        <span class="StatusValue">%</span>
+                        <span class="StatusValue">+</span>
+                        <span class="StatusText"></span>
+                        <span class="StatusValue">%</span>
+                        <span class="StatusValue">+</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">ATK+(STR%)</span>
+                        <span data-id="All-ATK$STR" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">MATK+(STR%)</span>
+                        <span data-id="All-MATK$STR" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">ATK+(INT%)</span>
+                        <span data-id="All-ATK$INT" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">MATK+(INT%)</span>
+                        <span data-id="All-MATK$INT" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">ATK+(VIT%)</span>
+                        <span data-id="All-ATK$VIT" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">MATK+(VIT%)</span>
+                        <span data-id="All-MATK$VIT" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">ATK+(AGI%)</span>
+                        <span data-id="All-ATK$AGI" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">MATK+(AGI%)</span>
+                        <span data-id="All-MATK$AGI" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">ATK+(DEX%)</span>
+                        <span data-id="All-ATK$DEX" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">MATK+(DEX%)</span>
+                        <span data-id="All-MATK$DEX" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">無耐性</span>
+                        <span data-id="All-Resist_Normal" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">火耐性</span>
+                        <span data-id="All-Resist_Fire" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">水耐性</span>
+                        <span data-id="All-Resist_Aqua" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">風耐性</span>
+                        <span data-id="All-Resist_Wind" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">地耐性</span>
+                        <span data-id="All-Resist_Ground" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">光耐性</span>
+                        <span data-id="All-Resist_Light" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">闇耐性</span>
+                        <span data-id="All-Resist_Darkness" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">直線軽減</span>
+                        <span data-id="All-Matigation_Line" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">突進軽減</span>
+                        <span data-id="All-Matigation_Rush" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">弾丸軽減</span>
+                        <span data-id="All-Matigation_Bullet" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">周囲軽減</span>
+                        <span data-id="All-Matigation_Surround" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">範囲軽減</span>
+                        <span data-id="All-Matigation_Range" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">痛床軽減</span>
+                        <span data-id="All-Matigation_Pain" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">隕石軽減</span>
+                        <span data-id="All-Matigation_Meteo" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">射刃軽減</span>
+                        <span data-id="All-Matigation_Blade" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">吸引軽減</span>
+                        <span data-id="All-Matigation_Kirby" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">爆発軽減</span>
+                        <span data-id="All-Matigation_Explosion" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">物理バリア</span>
+                        <span class="StatusValue">-</span>
+                        <span data-id="All-Barrier_Physical" class="StatusValue">0</span>
+                        <span class="StatusText">魔法バリア</span>
+                        <span class="StatusValue">-</span>
+                        <span data-id="All-Barrier_Magic" class="StatusValue">0</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">割合バリア</span>
+                        <span class="StatusValue">-</span>
+                        <span data-id="All-Barrier_Per" class="StatusValue">0</span>
+                        <span class="StatusText">バリア速度</span>
+                        <span class="StatusValue">-</span>
+                        <span data-id="All-Barrier_Repair" class="StatusValue">0</span>
+                    </div>
+                </div>
+                <div id="StatusSet_Attribute3" class="StatusSet_Items NoneText">
+                    <h3 class="PreviewStatus_Text">装備品補正値3</h3>
+                    <select name="showattributestatusselector" class="ShowAttributeStatusSelector">
+                        <option value="All">全ての合計値</option>
+                        <option value="Wepon">メイン装備</option>
+                        <option value="SubWepon">サブ装備</option>
+                        <option value="Armor">体装備</option>
+                        <option value="Addition">追加装備</option>
+                        <option value="Option">特殊装備</option>
+                        <option value="Enchant">エンチャント</option>
+                        <option value="Other">自由入力欄1</option>
+                        <option value="Other2">自由入力欄2</option>
+                        <option value="Other3">自由入力欄3</option>
+                        <option value="Crystal">クリスタ</option>
+                        <option value="Cooking">料理</option>
+                        <option value="ItemBuff">アイテムバフ</option>
+                        <option value="PartialAll">スキルバフ(一部のみ)</option>
+                    </select>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText"></span>
+                        <span class="StatusValue">%</span>
+                        <span class="StatusValue">+</span>
+                        <span class="StatusText"></span>
+                        <span class="StatusValue">%</span>
+                        <span class="StatusValue">+</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">物理追撃</span>
+                        <span data-id="All-Pursuit_ATK" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">魔法追撃</span>
+                        <span data-id="All-Pursuit_MATK" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">HP自然回復</span>
+                        <span data-id="All-NaturalRecovery_HP_Rate" class="StatusValue">0</span>
+                        <span data-id="All-NaturalRecovery_HP" class="StatusValue">0</span>
+                        <span class="StatusText">MP自然回復</span>
+                        <span data-id="All-NaturalRecovery_MP_Rate" class="StatusValue">0</span>
+                        <span data-id="All-NaturalRecovery_MP" class="StatusValue">0</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">絶対命中</span>
+                        <span data-id="All-AbsHIT" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">絶対回避</span>
+                        <span data-id="All-AbsFREE" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                    </div>
+                    <div class="StatusSet Flex">
+                        <span class="StatusText">復帰短縮</span>
+                        <span data-id="All-FirstReturn" class="StatusValue">0</span>
+                        <span class="StatusValue">-</span>
+                        <span class="StatusText">道具速度</span>
+                        <span class="StatusValue">-</span>
+                        <span data-id="All-ItemSpeed" class="StatusValue">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="" style="user-select: none;">
+            <div class="MenuIcon">
+                <i class="MenuLine"></i>
+                <i class="MenuLine"></i>
+                <i class="MenuLine"></i>
+                <span class="MenuIcon_Text">メニュー</span>
+            </div>
+        </nav>
+        <div class="ArchiveMenuArea NoneText">
+            <div class="SaveMenu">
+                <ul class="SaveMenu_List">
+                    <li class="SaveMenu_Item ItemSelect" data-value="Top">TOP</li>
+                    <li class="SaveMenu_Item" data-value="Sample">サンプルデータ</li>
+                    <li class="SaveMenu_Item" data-value="Save">セーブデータ</li>
+                    <li class="SaveMenu_Item" data-value="SubSystem">サブシステム</li>
+                    <li class="SaveMenu_Item" data-value="LinkSite">リンク</li>
+                    <li class="SaveMenu_Item" data-value="DataConfig">データ管理</li>
+                    <li class="SaveMenu_Item" data-value="Config">設定</li>
+                </ul>   
+                <div>
+                    <div class="ArchiveMenu_Reset">リセット</div>
+                    <div class="ArchiveMenu_Close">閉じる</div>
+                </div>
+            </div>
+            <div class="ArchiveMenu_Contents">
+            </div>
+            <div class="ArchiveMenu_Info">
+            </div>
+        </div>
+        <main class="Main">
+            <!-- Main_ステータス選択 -->
+            <section class="Area_Status">
+                <h2 class="AreaTitle">ステータス</h2>
+                <div class="Fit Fit_W">
+                    <div class="Umargin5 Fit">
+                        <span class="Text REM-nom">レベル</span>
+                        <input id="Status-Level" class="StatusSelector" type="number" value="1" min="-999" max="999"
+                            data-kouho="1,305,310,315" aria-label="プレイヤーレベル">
+                        <div class="StatusSelector_StatusInfo">
+                            <span>残りステータスポイント：</span>
+                            <span class="StatusSelector_PointInfo">56</span>
+                        </div>
+
+                    </div>
+                    <div class="Flex Umargin5 Fit">
+                        <div>
+                            <span class="Text REM-nom">STR</span>
+                            <input id="Status-STR" class="StatusSelector" type="number" value="1" min="0" max="510" data-kouho="247,255,505,510" aria-label="ステータス:STR">
+                        </div>
+                        <div>
+                            <span class="Text REM-nom">INT</span>
+                            <input id="Status-INT" class="StatusSelector" type="number" value="100" min="0" max="510" data-kouho="247,255,505,510" aria-label="ステータス:INT">
+                        </div>
+                        <div>
+                            <span class="Text REM-nom">VIT</span>
+                            <input id="Status-VIT" class="StatusSelector" type="number" value="1" min="0" max="510" data-kouho="247,255,505,510" aria-label="ステータス:VIT">
+                        </div>
+                    </div>
+                    <div class="Flex Umargin5 Fit">
+                        <div>
+                            <span class="Text REM-nom">AGI</span>
+                            <input id="Status-AGI" class="StatusSelector" type="number" value="1" min="0" max="510" data-kouho="247,255,505,510" aria-label="ステータス:AGI">
+                        </div>
+                        <div>
+                            <span class="Text REM-nom">DEX</span>
+                            <input id="Status-DEX" class="StatusSelector" type="number" value="1" min="0" max="510" data-kouho="247,255,505,510" aria-label="ステータス:DEX">
+                        </div>
+                        <button type="button" class="PreviewUpperStatusBtn">ステ振り効果</button>
+                    </div>
+                    <div class="Flex Umargin5 Fit">
+                        <div>
+                            <span class="Text REM-nom">CRT</span>
+                            <input id="Status-CRT" class="StatusSelector" type="number" value="0" min="0" max="255" data-kouho="1,247,255" aria-label="ステータス:CRT">
+                        </div>
+                        <div>
+                            <span class="Text REM-nom">MEN</span>
+                            <input id="Status-MEN" class="StatusSelector" type="number" value="0" min="0" max="255" data-kouho="1,247,255" aria-label="ステータス:MEN">
+                        </div>
+                        <div>
+                            <span class="Text REM-nom">TEC</span>
+                            <input id="Status-TEC" class="StatusSelector" type="number" value="0" min="0" max="255" data-kouho="1,247,255" aria-label="ステータス:TEC">
+                        </div>                      
+                    </div>
+                </div>
+            </section>
+            <!-- Main_武器情報 -->
+            <section class="Area_Wepons">
+                <h2 class="AreaTitle">武器</h2>
+                <div class="W100 Flex">
+                    <div class="MainWepon Fit_W">
+                        <h3 class="Fit">メイン武器</h3>
+                        <div class="Fit">
+                            <span class="Wepons_Text">武器種選択</span>
+                            <select id="OtherInfo-Wepon" class="WeponSelector">
+                                <option value="BH" selected>素手</option>
+                                <optgroup label="近接武器種">
+                                    <option value="OH">片手剣</option>
+                                    <option value="DS">双剣</option>
+                                    <option value="TH">両手剣</option>
+                                    <option value="MA">手甲</option>
+                                    <option value="HB">旋風槍</option>
+                                    <option value="KTN">抜刀剣</option>
+                                </optgroup>
+                                <optgroup label="遠距離武器種">
+                                    <option value="BW">弓</option>
+                                    <option value="BG">自動弓</option>
+                                    <option value="SF">杖</option>
+                                    <option value="MD">魔道具</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="Fit">
+                            <span class="Wepons_Text">武器ATK</span>
+                            <input type="number" id="OtherInfo-WeponATK" class="WeponInfo" data-kouho="1" aria-label="メイン武器ATK">
+                        </div>
+                        <div class="Fit">
+                            <span class="Wepons_Text">安定率</span>
+                            <input type="number" id="OtherInfo-Stable" class="WeponInfo" data-kouho="1,50,100" aria-label="メイン武器安定率">
+                        </div>
+                        <div class="Fit">
+                            <span class="Wepons_Text">精錬値</span>
+                            <select id="OtherInfo-Smelting" class="WeponSelector">
+                                <option value="0" selected>未精錬</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">E</option>
+                                <option value="11">D</option>
+                                <option value="12">C</option>
+                                <option value="13">B</option>
+                                <option value="14">A</option>
+                                <option value="15">S</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="SubWepon Fit_W">
+                        <h3 class="Fit">サブ武器</h3>
+                        <div class="Fit">
+                            <span class="Wepons_Text">武器種選択</span>
+                            <select id="OtherInfo-SubWepon" class="WeponSelector"></select>
+                        </div>
+                        <div class="Fit">
+                            <span class="Wepons_Text">武器ATK</span>
+                            <input type="number" id="OtherInfo-SubWeponATK" class="WeponInfo" data-kouho="1" aria-label="サブ武器ATK">
+                        </div>
+                        <div class="Fit">
+                            <span class="Wepons_Text">安定率</span>
+                            <input type="number" id="OtherInfo-SubStable" class="WeponInfo" data-kouho="1,50,100" aria-label="サブ武器安定率">
+                        </div>
+                        <div class="Fit">
+                            <span class="Wepons_Text">精錬値</span>
+                            <select id="OtherInfo-SubSmelting" class="WeponSelector">
+                                <option value="0" selected>未精錬</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">E</option>
+                                <option value="11">D</option>
+                                <option value="12">C</option>
+                                <option value="13">B</option>
+                                <option value="14">A</option>
+                                <option value="15">S</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Main_装備品情報 -->
+            <section class="Area_Equipment">
+                <h2 class="AreaTitle">装備品/付与プロパティ</h2>
+                <p class="Equipment_InfoText">タブから項目を選択し、能力値を入力してください。</p>
+                <ul class="Epuipment_List List Flex">
+                    <li id="Addition_OtherInfo-Wepon" class="Epuipment_Listitem TargetEquip"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Armor" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Addition" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Option" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-SubWepon" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Enchant" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Enchant2" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Enchant3" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-OtherEquipmentEffect" class="Epuipment_Listitem"><span>レジスタ他</span></li>
+                    <li id="Addition_OtherInfo-Other" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Other2" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Other3" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Other4" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Other5" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Other6" class="Epuipment_Listitem"><span>----</span></li>
+                    <li id="Addition_OtherInfo-Other7" class="Epuipment_Listitem"><span>----</span></li>
+                </ul>
+                <!-- Sub_任意装備品の選択 -->
+                <div class="Equipment_Templates">
+                    <div class="Equipment_Template">
+                        <div class="Flex">
+                         <p class="Equipment_InfoText">任意の装備品を指定できます。</p>
+                            <button type="button" class="TabNameChanger">タブ名称を変更</button>               
+                        </div>
+                        
+                        <div class="Flex" style="margin:5px;">
+                            <select name="equipment" id="EquipmentSelector" class="EquipmentSelector" data-type="Equipment" >
+                            </select>
+                            <div class="Flex EquipmentButtons">
+                                <button type="button" class="EquipmentButton" data-key="add">新規登録</button>
+                                <button type="button" class="EquipmentButton NoneText" data-key="edit">名称変更</button>
+                                <button type="button" class="EquipmentButton EquipmentChangeShowButtons NoneText" data-key="changelevel">順位設定</button>
+                                <button type="button" class="EquipmentButton EquipmentChangeShowButtons NoneText" data-key="changetag">タグ設定</button>
+                                <button type="button" class="EquipmentButton EquipmentDeleteButton NoneText" data-key="delete">削除</button>
+                            </div>                            
+                        </div>
+                        
+
+                        <p class="Equipment_InfoText EquipmentSelectorInfo NoneText">
+                            ※各装備は任意の値に変更できます。
+                        </p>  
+                        <p class="Equipment_ExtensionInfo EquipmentSelectorInfo NoneText">
+                            ※装備品追加効果：
+                        </p>
+                        <div id="ArmorSelector" class="ArmorSelector NoneText">
+                            <div class="RADIOSET">
+                                <span class="OptionSelector_Text">防具の改造</span>
+                                <input type="radio" id="armst1" class="InputOption _radio" name="armst"
+                                    value="ArmorOption-nomal" checked>
+                                <label for="armst1" class="_label _pinkgold">通常</label>
+                                <input type="radio" id="armst2" class="InputOption _radio" name="armst"
+                                    value="ArmorOption-heavy">
+                                <label for="armst2" class="_label _gray">重量化</label>
+                                <input type="radio" id="armst3" class="InputOption _radio" name="armst"
+                                    value="ArmorOption-light">
+                                <label for="armst3" class="_label _bluehawaii">軽量化</label>
+                            </div>
+                        </div>
+                        <div class="EquipmentInWeponsATK NoneText" data-key="WeponATK">
+                            <div class="SetWeponAttributeSelectorElements" data-type="default">
+                                <span class="Equipment_WeponATK_ViewNames">メイン武器ATK</span>
+                                <input type="number" class="Equipment_WeponATK_Values" data-key="MainWeponATK" data-type="weponATK">
+                            </div>
+                            <div class="SetWeponAttributeSelectorElements" data-type="try">
+                                <span class="SetWeponAttributeSelectorElements_Text">メイン武器情報</span>
+                                <button type="button" class="SetEquipmentPropertyButtons" value="0" data-wepon="Main">登録</button>
+                                <button type="button" class="SetEquipmentPropertyButtons" value="1" data-wepon="Main">削除</button>
+                                <p style="margin-top: 5px;font-size: 0.8rem;">※ボタンを押したときのみ武器能力情報を登録、または削除します。</p>
+                            </div>
+                        </div>
+                        <div class="EquipmentInWeponsATK NoneText" data-key="SubWeponATK">
+                            <div class="SetWeponAttributeSelectorElements" data-type="default">
+                                <span class="Equipment_WeponATK_ViewNames">サブ武器ATK</span>
+                                <input type="number" class="Equipment_WeponATK_Values" data-key="SubWeponATK" data-type="weponATK">
+                            </div>
+                            <div class="SetWeponAttributeSelectorElements" data-type="try">
+                                <span class="SetWeponAttributeSelectorElements_Text">サブ武器情報</span>
+                                <button type="button" class="SetEquipmentPropertyButtons" value="0" data-wepon="Sub">登録</button>
+                                <button type="button" class="SetEquipmentPropertyButtons" value="1" data-wepon="Sub">削除</button>
+                            </div>
+                        </div>
+                        <div class="EquipmentCrystals NoneText">
+                            <div class="Flex">
+                                <span class="EquipmentCrystalsText">1つ目</span>
+                                <select name="" data-count="1" class="CrystalSelector" data-type="Equipment_Crystal"></select>
+                            </div>
+                            <div class="Flex">
+                                <span class="EquipmentCrystalsText">2つ目</span>
+                                <select name="" data-count="2" class="CrystalSelector" data-type="Equipment_Crystal"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="OtherEquipmentEffect_Templates NoneText">
+                </div>
+            </section>
+            <!-- Main_クリスタ情報 -->
+            <section class="Area_Crystal">
+                <h2 class="AreaTitle">クリスタ</h2>
+                <div class="Flex">
+                    <div class="CrystalSet">
+                        <div class="Texts">
+                            <p class="Crystal_Text">武器</p>
+                            <p class="Crystal_Ans" data-target="1/2">?</p>
+                        </div>
+                        <div class="Crystals">
+                            <select name="" id="Crystal_Wepon_1" data-category="Wepon" data-count="1" data-prop="1" data-type="Crystal" class="CrystalSelector"></select>
+                            <select name="" id="Crystal_Wepon_2" data-category="Wepon" data-count="2" data-prop="2" data-type="Crystal" class="CrystalSelector"></select>
+                        </div>
+                    </div>
+                    <div class="CrystalSet">
+                        <div class="Texts">
+                            <p class="Crystal_Text">防具</p>
+                            <p class="Crystal_Ans" data-target="3/4">?</p>
+                        </div>
+                        <div class="Crystals">
+                            <select name="" id="Crystal_Armor_3" data-category="Armor" data-count="1" data-prop="3" data-type="Crystal" class="CrystalSelector"></select>
+                            <select name="" id="Crystal_Armor_4" data-category="Armor" data-count="2" data-prop="4" data-type="Crystal" class="CrystalSelector"></select>
+                        </div>
+                    </div>
+                    <div class="CrystalSet">
+                        <div class="Texts">
+                            <p class="Crystal_Text">追加</p>
+                            <p class="Crystal_Ans" data-target="5/6">?</p>
+                        </div>
+                        <div class="Crystals">
+                            <select name="" id="Crystal_Addition_5" data-category="Addition" data-count="1" data-prop="5" data-type="Crystal" class="CrystalSelector"></select>
+                            <select name="" id="Crystal_Addition_6" data-category="Addition" data-count="2" data-prop="6" data-type="Crystal" class="CrystalSelector"></select>
+                        </div>
+                    </div>
+                    <div class="CrystalSet">
+                        <div class="Texts">
+                            <p class="Crystal_Text">特殊</p>
+                            <p class="Crystal_Ans" data-target="7/8">?</p>
+                        </div>
+                        <div class="Crystals">
+                            <select name="" id="Crystal_Option_7" data-category="Option" data-count="1" data-prop="7" data-type="Crystal" class="CrystalSelector"></select>
+                            <select name="" id="Crystal_Option_8" data-category="Option" data-count="2" data-prop="8" data-type="Crystal" class="CrystalSelector"></select>
+                        </div>
+                    </div>
+                    <div id="CrystalReference" class="W100">
+                    </div>
+                </div>
+            </section>
+            <!-- Main_アイテム/バフ情報 -->
+            <section class="Area_ItemBuff">
+                <h2 class="AreaTitle">アイテムバフ</h2>
+                <div class="Flex">
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">物理威力</span>
+                        <select name="" data-type="Buff" data-item="Attacker" id="Item_Attacker" class="ItemBuffSelector"></select>
+                    </div>
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">魔法威力</span>
+                        <select name="" data-type="Buff" data-item="Magical" id="Item_Magical" class="ItemBuffSelector"></select>
+                    </div>
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">物理防御</span>
+                        <select name="" data-type="Buff" data-item="Defense" id="Item_Defense" class="ItemBuffSelector"></select>
+                    </div>
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">魔法防御</span>
+                        <select name="" data-type="Buff" data-item="MagicDefense" id="Item_MagicDefense" class="ItemBuffSelector"></select>
+                    </div>
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">属性攻撃</span>
+                        <select name="" data-type="Buff" data-item="AttrPower" id="Item_AttrPower" class="ItemBuffSelector"></select>
+                    </div>
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">属性防御</span>
+                        <select name="" data-type="Buff" data-item="AttrDef" id="Item_AttrDef" class="ItemBuffSelector"></select>
+                    </div>                    
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">速度</span>
+                        <select name="" data-type="Buff" data-item="Speed" id="Item_Speed" class="ItemBuffSelector"></select>
+                    </div>
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">詠唱</span>
+                        <select name="" data-type="Buff" data-item="Chant" id="Item_Chant" class="ItemBuffSelector"></select>
+                    </div>
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">MP</span>
+                        <select name="" data-type="Buff" data-item="MP" id="Item_MP" class="ItemBuffSelector"></select>
+                    </div>
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">HP</span>
+                        <select name="" data-type="Buff" data-item="HP" id="Item_HP" class="ItemBuffSelector"></select>
+                    </div>
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">命中</span>
+                        <select name="" data-type="Buff" data-item="HIT" id="Item_HIT" class="ItemBuffSelector"></select>
+                    </div>
+                    <div class="ItemBuffSet">
+                        <span class="ItemBuff_Text">回避</span>
+                        <select name="" data-type="Buff" data-item="FREE" id="Item_FREE" class="ItemBuffSelector"></select>
+                    </div>
+                </div>
+            </section>
+            <!-- Man_料理情報 -->
+            <section class="Area_Cooking">
+                <h2 class="AreaTitle">料理</h2>
+                <div class="Flex">
+                    <div class="EatSet">
+                        <span class="Eat_Text">1つ目</span>
+                        <select name="" id="EatList_1" class="EatSelector">
+                        </select>
+                        <select name="" id="EatLv_1" class="EatSelector_Lv">
+                        </select>
+                    </div>
+                    <div class="EatSet">
+                        <span class="Eat_Text">2つ目</span>
+                        <select name="" id="EatList_2" class="EatSelector">
+                        </select>
+                        <select name="" id="EatLv_2" class="EatSelector_Lv">
+                        </select>
+                    </div>
+                    <div class="EatSet">
+                        <span class="Eat_Text">3つ目</span>
+                        <select name="" id="EatList_3" class="EatSelector">
+                        </select>
+                        <select name="" id="EatLv_3" class="EatSelector_Lv">
+                        </select>
+                    </div>
+                    <div class="EatSet">
+                        <span class="Eat_Text">4つ目</span>
+                        <select name="" id="EatList_4" class="EatSelector">
+                        </select>
+                        <select name="" id="EatLv_4" class="EatSelector_Lv">
+                        </select>
+                    </div>
+                    <div class="EatSet">
+                        <span class="Eat_Text">5つ目</span>
+                        <select name="" id="EatList_5" class="EatSelector">
+                        </select>
+                        <select name="" id="EatLv_5" class="EatSelector_Lv">
+                        </select>
+                    </div>
+                </div>
+            </section>
+            <!-- Main_パッシブスキル選択 -->
+            <section class="Area_PassiveSkill">
+                <h2 class="AreaTitle">バフスキル</h2>
+                <div id="PassiveBuffs" class="BuffSkillSelectors">
+                </div>
+            </section>
+            <!-- Main_攻撃スキル情報 -->
+            <section class="Area_Skill">
+                <h2 class="AreaTitle">攻撃スキル</h2>
+                <ul class="List Flex SkillComboSelector">
+                    <li class="SkillComboSelector_Item ItemActive" data-target="Once"><span>単発スキル</span></li>
+                    <li class="SkillComboSelector_Item" data-target="Combo"><span>コンボ構成</span></li>
+                </ul>
+                <div class="Skill_Area" data-target="Once">
+                    <p>項目からスキルを選択してください。</p>
+                    <select name="skill" id="SkillSelector" class="SkillSelector">
+                    </select>
+                    <div class="SkillPowers">
+                        <div class="Flex">
+                            <span class="SkillResultInfos">スキル威力値</span>
+                            <span class="SkillResultInfos2">:</span>
+                            <p id="SkillPowers_Power"></p>
+                        </div>
+                        <div class="Flex">
+                            <span class="SkillResultInfos">スキル固定値</span>
+                            <span class="SkillResultInfos2">:</span>
+                            <p id="SkillPowers_Fixed"></p>
+                        </div>
+                        <div class="Flex">
+                            <span class="SkillResultInfos">消費MP</span>
+                            <span class="SkillResultInfos2">:</span>    
+                            <p id="SkillMP_Single"></p>
+                        </div>
+                    </div>
+                    <div class="ShowSkillEffectArea">
+                    </div>
+                    <h3 class="SkillTagText">絞り込みメニュー</h3>
+                    <p>攻撃スキルの表示を指定の分類に絞り込みます。</p>
+                    <div class="SkillsSelectorSet Flex">
+                        <button type="button" value="Skills-All" class="SkillsSelector Selectedskill">制限なし</button>
+                        <button type="button" value="Skills-Sword" class="SkillsSelector">剣系統</button>
+                        <button type="button" value="Skills-DualSword" class="SkillsSelector">双剣系統</button>
+                        <button type="button" value="Skills-Martial" class="SkillsSelector">拳系統</button>
+                        <button type="button" value="Skills-Halberd" class="SkillsSelector">槍系統</button>
+                        <button type="button" value="Skills-Mononof" class="SkillsSelector">刀系統</button>
+                        <button type="button" value="Skills-Shoot" class="SkillsSelector">弓系統</button>
+                        <button type="button" value="Skills-Magic" class="SkillsSelector">魔法系統</button>
+                        <button type="button" value="Skills-MagicWarrior" class="SkillsSelector">魔法剣士系統</button>
+                        <button type="button" value="Skills-Other" class="SkillsSelector">その他</button>
+                    </div>
+                    <!-- 威力変更 -->
+                    <div id="ChangeSkillPowers">
+                        <h3 class="SkillTagText">スキル威力変更</h3>
+                        <div class="SkillDamegeSet Flex">
+                            <div>
+                                <div class="SkillDamegeSet_Power">
+                                    <span class="P_Skill_Span">スキル威力</span>
+                                    <input type="number" name="power" value="100" min="0" max="10000" id="Default-BasePower"
+                                        class="DefaultSkillSelector" data-kouho="100,500,1000,2000" aria-label="スキルの威力値(%)">
+                                </div>
+                                <div class="SkillDamegeSet_Fixed">
+                                    <span class="P_Skill_Span">スキル固定値</span>
+                                    <input type="number" name="power" value="0" min="0" max="10000" id="Default-BaseFixedPower"
+                                        class="DefaultSkillSelector" data-kouho="100,500,1000" aria-label="スキルの固定威力値">
+                                </div>
+                            </div>
+                            <div class="SkillDamegeSet_Change">
+                                <p class="SkillDamegeSet_Change_Text">威力参照</p>
+                                <input type="radio" name="spower" value="ATK" id="Default-Reference-ATK"
+                                class="DefaultSkillSelector _radio">
+                                <label for="Default-Reference-ATK" class="_label _hydrangea">ATK</label>
+                                <input type="radio" name="spower" checked value="ATK2" id="Default-Reference-ATK2"
+                                    class="DefaultSkillSelector _radio">
+                                <label for="Default-Reference-ATK2" class="_label _hydrangea">総ATK</label>
+                                <input type="radio" name="spower" value="MATK" id="Default-Reference-MATK"
+                                    class="DefaultSkillSelector _radio">
+                                <label for="Default-Reference-MATK" class="_label _chartreuse">MATK</label>
+                            </div>
+                        </div>
+                        <p class="ChangeText">
+                            ※スキルの威力値変更について<br>
+                            ・変更可能な威力値は<span>1撃目のみ</span>です。2,3撃目は変更されません。<br>
+                            ・<span>威力</span>/
+                            <span>固定値</span>/
+                            <span>威力参照</span>は変更した値で再計算されます。<br>
+                            ・威力参照変更時は追加で以下のように参照が変更されます。<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;ATK参照⇒DEF/物理耐性参照、MATK参照⇒MDEF/魔法耐性参照<br>
+                            ・ステータス参照による威力/固定値増加部分の変更はできません。<br>
+                        </p>
+                    </div>
+                </div>
+                <div class="Skill_Area" data-target="Combo"></div>
+            </section>
+            <!-- Main_敵情報 -->
+            <section class="Area_Enemy">
+                <h2 class="AreaTitle">敵</h2>
+                <div>
+                    <div class="Flex">
+                        <p class="Enemy_Text">項目から敵を選択してください。</p>
+                        <select name="enemy" id="EnemySelector">
+                        </select>
+                    </div>
+                    <table class="EnemyInfoTable">
+                        <tbody>
+                            <tr>
+                                <td rowspan="2"></td>
+                                <td colspan="2" class="EnemyInfo_Resist"></td>
+                                <td colspan="2" class="EnemyInfo_ResistM"></td>
+                            </tr>
+                            <tr class="tes">
+                                <td class="EnemyInfo_State">Normal</td>
+                                <td class="EnemyInfo_State">Hard</td>
+                                <td class="EnemyInfo_State">Lunatic</td>
+                                <td class="EnemyInfo_State">Ultimate</td>
+                            </tr>
+                            <tr>
+                                <td class="EnemyInfo_Item">Lv</td>
+                                <td id="EnemyInfo_nomal_Lv" class="EnemyInfo_Values">166</td>
+                                <td id="EnemyInfo_hard_Lv" class="EnemyInfo_Values">176</td>
+                                <td id="EnemyInfo_luna_Lv" class="EnemyInfo_Values">186</td>
+                                <td id="EnemyInfo_ulti_Lv" class="EnemyInfo_Values">206</td>
+                            </tr>
+                            <tr>
+                                <td class="EnemyInfo_Item">DFF</td>
+                                <td id="EnemyInfo_nomal_DEF" class="EnemyInfo_Values">250</td>
+                                <td id="EnemyInfo_hard_DEF" class="EnemyInfo_Values">500</td>
+                                <td id="EnemyInfo_luna_DEF" class="EnemyInfo_Values">1,000</td>
+                                <td id="EnemyInfo_ulti_DEF" class="EnemyInfo_Values">1,500</td>
+                            </tr>
+                            <tr>
+                                <td class="EnemyInfo_Item">MDFF</td>
+                                <td id="EnemyInfo_nomal_MDEF" class="EnemyInfo_Values">250</td>
+                                <td id="EnemyInfo_hard_MDEF" class="EnemyInfo_Values">500</td>
+                                <td id="EnemyInfo_luna_MDEF" class="EnemyInfo_Values">1,000</td>
+                                <td id="EnemyInfo_ulti_MDEF" class="EnemyInfo_Values">1,500</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="Enemy_Extension">
+                        <div class="Enemy_ExtensionBlock Flex">
+                            <div class="Enemy_ExtensionQuestion" data-key="Critical">?</div>
+                            <span class="Enemy_ExtensionInfoText">確定クリティカル</span>
+                            <input type="number" class="Enemy_ExtensionValues" data-key="Critical" min="0" max="999">
+                        </div>
+                        <div class="Enemy_ExtensionBlock Flex">
+                            <div class="Enemy_ExtensionQuestion" data-key="Hit">?</div>
+                            <span class="Enemy_ExtensionInfoText">必要HIT</span>
+                            <input type="number" class="Enemy_ExtensionValues" data-key="Hit" min="0" max="9999">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div class="SystemLoad"></div>
+        <div class="AnotherSystems NoneText">
+            <div class="SubSystems">
+                <p class="EndSubSystem">終了</p>
+                <p class="SubSystemTitle">ダメージ計算サブシステム</p>
+                <h2 class="SubSystemMainTitle"></h2>
+                <div class="SubSystem"></div>
+            </div>
+        </div>
+        <footer class="Footer Flex">
+            <p class="Footer_Text">シミュレータに関するお問い合わせ先 : <a href="https://twitter.com/azukitrm/">X</a></p>
+        </footer>
+    </form>
+</body>
+</html>

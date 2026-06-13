@@ -1,0 +1,453 @@
+html{
+  --SiteBase:white;
+  --FontBase:black;
+  --AnimanitonStartColor:rgb(202, 249, 248);
+  --AnimanitonEndColor_From:rgb(162, 203, 234);
+  --AnimanitonEndColor_To:rgb(162, 203, 234);
+  --HeaderUserCustomColor:rgb(155,255,205);
+  --HeaderUserEnemyColor:rgb(205,175,245);
+  --EndBtnColor:rgb(240, 206, 162);
+  --EndBtnLineColor:rgb(255, 81, 0);
+
+  --CustomBtnBaseLineColor:rgb(212, 212, 212);
+  --CustomBtnNewColor:rgb(254, 198, 217);
+  --CustomBtnNewFontColor:rgb(32, 13, 26);
+  --CustomBtnChangeColor:rgb(135, 212, 239);
+  --CustomBtnChangeFontColor:rgb(4, 39, 39);
+  --CustomBtnDeleteColor:rgb(95, 95, 95);
+  --CustomBtnDeleteFontColor:rgb(246, 246, 246);
+  --CustomBtnNextColor:rgb(240, 187, 89);
+  --CustomBtnBackColor:rgb(149, 244, 221);
+  --CustomBtnCancelColor:rgb(201, 201, 201);
+  --CustomBtnCancelLineColor:rgb(161, 161, 161);
+  --CustomBtnCompleteColor:rgb(241, 165, 165);
+  --ResultColor:rgb(251, 241, 214);
+  --ResultLineColor:rgb(253, 212, 137);
+  --ResultPlusFont:blue;
+
+  --CustomItemColor:rgb(223, 255, 245);
+  --CustomItemLineColor:rgb(205, 254, 238);
+  --CustomChangeItemBtnColor:rgb(251, 208, 192);
+  --CustomChangeItemBtnLineColor:rgb(253, 224, 224);
+  --CustomChangeItemBtnHoverColor:rgb(208, 192, 251);
+  --CustomChangeItemBtnHoverLineColor:rgb(224, 232, 253);
+
+  --CustomEnemyColor:rgb(200, 214, 244);
+  --CustomEnemyLineColor:rgb(121, 143, 250);
+}
+html.dark{
+  --SiteBase:rgb(20, 20, 20);
+  --FontBase:rgba(220, 220, 220, 0.902);
+  --AnimanitonStartColor:rgb(0, 0, 0);
+  --AnimanitonEndColor_From:rgb(0, 14, 118);
+  --AnimanitonEndColor_To:rgb(0, 0, 0);
+  --HeaderUserCustomColor:rgb(3, 36, 19);
+  --HeaderUserEnemyColor:rgb(51, 43, 61);
+
+  --EndBtnColor:rgb(44, 37, 28);
+  --EndBtnLineColor:rgb(255, 255, 255);
+
+  --CustomBtnBaseLineColor:rgb(40, 40, 40);
+  --CustomBtnNewColor:rgb(137, 6, 78);
+  --CustomBtnNewFontColor:rgb(240, 190, 224);
+  --CustomBtnChangeColor:rgb(42, 79, 93);
+  --CustomBtnChangeFontColor:rgb(197, 231, 231);
+  --CustomBtnDeleteColor:rgb(60, 60, 60);
+  --CustomBtnDeleteFontColor:rgb(246, 246, 246);
+  --CustomBtnNextColor:rgb(143, 104, 30);
+  --CustomBtnBackColor:rgb(60, 119, 104);
+  --CustomBtnCancelColor:rgb(60, 60, 60);
+  --CustomBtnCancelLineColor:rgb(214, 214, 214);
+  --CustomBtnCompleteColor:rgb(179, 49, 49);
+  --ResultColor:rgba(44, 36, 46, 0.886);
+  --ResultLineColor:rgb(63, 61, 56);
+  --ResultPlusFont:rgb(87, 87, 255);
+
+  --CustomItemColor:rgb(4, 42, 30);
+  --CustomItemLineColor:rgb(17, 94, 68);
+  --CustomChangeItemBtnColor:rgb(14, 4, 86);
+  --CustomChangeItemBtnLineColor:rgb(55, 47, 149);
+  --CustomChangeItemBtnHoverColor:rgb(81, 56, 2);
+  --CustomChangeItemBtnHoverLineColor:rgb(157, 130, 24);
+
+  --CustomEnemyColor:rgb(10, 20, 40);
+  --CustomEnemyLineColor:rgb(28, 41, 105);
+}
+html.carrot,html.carrowhite{
+  --AnimanitonStartColor:var(--CarrotLv2);
+  --AnimanitonEndColor_From:var(--CarrotLv6);
+  --AnimanitonEndColor_To:var(--CarrotLv5);
+  --HeaderUserCustomColor:var(--GrassLv2);
+  --HeaderUserEnemyColor:var(--GrassLv2);
+  --EndBtnColor:var(--CarrotLv1);
+  --EndBtnLineColor:var(--CarrotLv5);
+
+  --CustomBtnBaseLineColor:var(--GrandLv2);
+  --CustomBtnNewColor:var(--CarrotLv4);
+  --CustomBtnNewFontColor:var(--GrassLv5);
+  --CustomBtnChangeColor:var(--CarrotLv6);
+  --CustomBtnChangeFontColor:var(--GrassLv3);
+  --CustomBtnDeleteColor:var(--GrandLv4);
+  --CustomBtnDeleteFontColor:rgb(246, 246, 246);
+  --CustomBtnNextColor:var(--CarrotLv6);
+  --CustomBtnBackColor:var(--GrassLv2);
+  --CustomBtnCancelColor:var(--GrandLv2);
+  --CustomBtnCancelLineColor:var(--GrandLv3);
+  --CustomBtnCompleteColor:var(--CarrotLv4);
+  --ResultColor:var(--CarrotLv3);
+  --ResultLineColor:var(--CarrotLv6);
+  --ResultPlusFont:var(--BlueGrad3);
+
+  --CustomItemColor:var(--CarrotLv2);
+  --CustomItemLineColor:var(--CarrotLv3);
+  --CustomChangeItemBtnColor:var(--CarrotLv4);
+  --CustomChangeItemBtnLineColor:none;
+  --CustomChangeItemBtnHoverColor:rgb(208, 192, 251);
+  --CustomChangeItemBtnHoverLineColor:none;
+
+  --CustomEnemyColor:var(--CarrotLv3);
+  --CustomEnemyLineColor:var(--BlueGrad3);
+}
+html.cyber,
+html.cyber2{
+
+  --AnimanitonStartColor:rgb(0, 0, 0);
+  --AnimanitonEndColor_From:rgb(0, 159, 135);
+  --AnimanitonEndColor_To:rgb(0, 0, 0);
+  --HeaderUserCustomColor:rgb(3, 36, 19);
+  --HeaderUserEnemyColor:rgb(51, 43, 61);
+
+  --EndBtnColor:rgb(44, 37, 28);
+  --EndBtnLineColor:rgb(255, 255, 255);
+
+  --CustomBtnBaseLineColor:rgb(40, 40, 40);
+  --CustomBtnNewColor:rgb(69, 169, 153);
+  --CustomBtnNewFontColor:rgb(242, 242, 242);
+  --CustomBtnChangeColor:rgb(13, 123, 122);
+  --CustomBtnChangeFontColor:rgb(197, 231, 231);
+  --CustomBtnDeleteColor:rgb(60, 60, 60);
+  --CustomBtnDeleteFontColor:rgb(246, 246, 246);
+  --CustomBtnNextColor:rgb(87, 198, 189);
+  --CustomBtnBackColor:rgb(60, 119, 104);
+  --CustomBtnCancelColor:rgb(60, 60, 60);
+  --CustomBtnCancelLineColor:rgb(214, 214, 214);
+  --CustomBtnCompleteColor:rgb(69, 169, 153);
+  --ResultColor:rgba(44, 36, 46, 0.886);
+  --ResultLineColor:rgb(63, 61, 56);
+  --ResultPlusFont:rgb(67, 203, 158);
+
+  --CustomItemColor:rgb(0, 0, 0);
+  --CustomItemLineColor:rgb(67, 203, 158);
+  --CustomChangeItemBtnColor:rgb(54, 175, 135);
+  --CustomChangeItemBtnLineColor:rgb(14, 108, 86);
+  --CustomChangeItemBtnHoverColor:rgb(216, 126, 224);
+  --CustomChangeItemBtnHoverLineColor:rgb(198, 7, 202);
+
+  --CustomEnemyColor:rgb(0, 0, 0);
+  --CustomEnemyLineColor:rgb(31, 207, 142);
+}
+.Header_UserCustom{
+  background-color: var(--HeaderUserCustomColor);
+}
+.Header_EnemyCustom{
+  background-color: var(--HeaderUserEnemyColor);
+}
+.AnotherSystems{
+  margin: 0;
+  width: 95vw;
+}
+.StartSubSystem{
+  position: fixed;
+  animation-name: GoElement;
+  animation-duration: 1.5s;
+  animation-fill-mode: both;  
+  z-index: 1000;
+}
+@keyframes GoElement {
+  0%{
+    width: 0;
+  }
+  25%,70%{
+    top:0%;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--AnimanitonStartColor);
+    opacity: 1;
+  }
+  100%{
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+  }
+}
+.ExitSubSystem{
+  position: fixed;
+  top:0;
+  width: 100vw;
+  animation-name: EndElement;
+  animation-duration: 1s;
+  animation-fill-mode: both;  
+  z-index: 1000; 
+}
+@keyframes EndElement {
+  0%{
+    height: 0;
+    background-color: var(--AnimanitonEndColor_From);
+  }
+  50%{
+    height: 100vh;
+  }
+  70%{
+    opacity: 1;
+  }
+  100%{
+    height: 100vh;
+    opacity: 0;
+    background-color: var(--AnimanitonEndColor_To);
+  }
+}
+.mcenter{
+  margin: 0 auto;
+  display: block;
+}
+.SubSystems{
+  max-width: 700px;
+  margin: 5px auto 0 auto;
+  border: solid 3px rgba(253, 171, 146, 0.668);
+  border-radius: .5rem;
+}
+.EndSubSystem{
+  position: relative;
+  float: right;
+  right: -4px;
+  top: -5px;
+  width: 4rem;
+  border: solid 3px rgba(94, 94, 94, 0.668);
+  border-radius: .8rem;
+  background-color: var(--SiteBase);
+  text-align: center;
+  font-size: 1.2rem;
+}
+.EndSubSystem:hover{
+  border-color: var(--EndBtnLineColor);
+  background-color: var(--EndBtnColor);
+}
+/*main*/
+.SubSystemTitle,.SubSystemMainTitle,
+.SubSystemText{
+  margin: inherit;
+  width: fit-content;
+}
+.SubSystemTitle{
+  font-size: .8rem;
+  color: rgb(104, 104, 104);
+}
+.SubSystemMainTitle{
+  font-size: 1.4rem;
+}
+.SubSystemText{
+  margin: 10px auto;
+}
+.CustomBtn{
+  margin: 15px auto 10px auto;
+  width: 8rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: .7rem;
+  border: solid 1px var(--CustomBtnBaseLineColor)
+}
+.CustomBtn:hover{
+  transform: translate(1px,1px);
+}
+.NewCustom,.CustomOK{
+  background-color: var(--CustomBtnNewColor);
+  color: var(--CustomBtnNewFontColor);
+}
+.ChangeCustom,.CustomNo{
+  background-color: var(--CustomBtnChangeColor);
+  color: var(--CustomBtnChangeFontColor);  
+}
+.DeleteCustom{
+  background-color: var(--CustomBtnDeleteColor);
+  color: var(--CustomBtnDeleteFontColor);  
+}
+.NextCustom,.BackCustom,.CancelCustom,.CompleteCustom{
+  color: var(--FontBase);
+}
+.NextCustom{
+  background-color: var(--CustomBtnNextColor);
+}
+.BackCustom{
+  background-color: var(--CustomBtnBackColor);
+}
+.CancelCustom{
+  background-color:var(--CustomBtnCancelColor) ;
+  border: solid 1px var(--CustomBtnCancelLineColor);
+}
+.CompleteCustom{
+  background-color: var(--CustomBtnCompleteColor);
+}
+.ResultText{
+  margin-left: 5px;
+}
+#AdditionGroupSelector,
+.SubSystemTextInput{
+  display: block;
+  margin: 5px auto;
+  width: 15rem;
+}
+.AdditionsResult{
+  margin: 10px auto;
+  width: fit-content;
+  min-height: 15rem;
+  background-color: var(--ResultColor);
+  border: solid 2px var(--ResultLineColor);
+  border-radius: .5rem;
+}
+.AdditionsResult_Title{
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.AdditionsResult_Plus,
+.AdditionsResult_Minus{
+  margin: 3px 5px;
+  width: 12rem;
+  text-align: left;
+}
+.AdditionsResult_Plus{
+  color: var(--ResultPlusFont);
+}
+.AdditionsResult_Minus{
+  color:red;
+}
+.AdditionsResult_Text{
+  display: inline-block;
+  width: 8rem;
+}
+
+/* 変更　*/
+.Items{
+  margin: 5px 3px;
+}
+.ItemArea{
+  margin: 3px 3px;
+  padding: 10px 0px;
+  width: 100%;
+  background-color: var(--CustomItemColor);
+  border: solid 3px var(--CustomItemLineColor);
+  border-radius: 1rem;
+}
+@media screen and (min-width:400px) {
+  .ItemArea{width: calc(50% - 6px);}
+}
+@media screen and (min-width:620px) {
+  .ItemArea{width: calc(100% / 3 - 6px);}
+}
+.ItemArea_Title{
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+.ItemArea_ItemText{
+  display: inline-block;
+  margin: 5px 0 5px 5px;
+  font-size: .9rem;
+  width: calc(100% - 4rem);
+}
+.ItemArea_ChangeBtn{
+  margin: auto 3px auto 0;
+  font-size: .9rem;
+  width: 3rem;
+  height: 2rem;
+  font-weight: bold;
+  border-radius: .7rem;
+  color: var(--FontBase);
+  border: solid 1px var(--CustomChangeItemBtnLineColor);
+  background-color: var(--CustomChangeItemBtnColor);
+}
+.ItemArea_ChangeBtn:hover{
+  border: solid 1px var(--CustomChangeItemBtnHoverLineColor);
+  background-color: var(--CustomChangeItemBtnHoverColor);
+  transform: translate(1px,1px);
+}
+
+/** 敵選択 */
+.EnemyResult,
+.EnemyInputArea{
+  margin: 10px auto;
+  width: 80%;
+  max-width: 400px;
+}
+.EnemyResult{
+  background-color: var(--CustomEnemyColor);
+  border: solid 2px var(--CustomEnemyLineColor);
+  border-radius: 1rem;
+  transition-duration: .5s;
+}
+.EnemyResultInfoText{
+  margin: 8px auto 2px auto;
+  text-align: center;
+  font-size: .8rem;
+  color: rgb(169, 20, 20);
+}
+.EnemyResult_EnemyNames,
+.EnemyResult_EnemyInfo{
+  margin: 5px auto;
+  width: fit-content;
+  text-align: center;
+}
+.EnemyResult_EnemyNames,
+#EnemyResult_Name,
+#EnemyResult_lv{
+  font-size: 1.4rem;
+}
+.EnemyResult_EnemyInfo{
+  font-size: .8rem;
+}
+.EnemyResult_Texts{
+  margin: 5px auto;
+  width: 100%;
+}
+.EnemyResult_TextSet,
+.EnemyInputSet{
+  display: inline-block;
+  width: 50%;
+  padding-left: 5%;
+}
+.EnemyInputSet{
+  margin: 5px auto;
+  width: 40%;
+}
+.EnemyInputArea .EnemyInputSet:nth-child(even){
+  width: 60%;
+}
+
+.EnemyResult_Text,
+.EnemyInput_Text{
+  display: inline-block;
+  width: 3rem;
+}
+.EnemyResult_Text2,
+.EnemyInput_Text2{
+  display: inline-block;
+  width: 4rem;
+}
+.EnemyInputRadioSet{
+  border-bottom: solid 2px var(--RadioLines);
+}
+.EnemyInput_RadioText{
+  display: inline-block;
+  width: 3.8rem;
+  font-size: .8rem;
+  text-align: center;
+}
+@media screen and (max-width:400px) {
+  .EnemyResult,
+  .EnemyInputArea{
+    width: 99%;
+  }
+}
