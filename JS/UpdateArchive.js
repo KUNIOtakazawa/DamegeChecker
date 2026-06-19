@@ -1540,6 +1540,10 @@ const UpdateArchives = [
         new Update_Equipment([
             "トナカホーン(追加)"
         ])
+    ]),
+    new Update("2026/6/19", "1.25.16.0", [
+        new Update_Equipment(["ふわ耳帽子(追加)"]),
+        new Update_Crystal(["キピナ(ウェポン)"])
     ])
 ];
 

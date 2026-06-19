@@ -3939,6 +3939,9 @@ const SelectionData = {
     2550: new AddEquipment("トナカホーン", EquipGroup.Create, {
       Distance: 11, STR_Rate: 10, HP: 900, Resist_Magic: -10
     }),
+    2560: new AddEquipment("ふわ耳帽子", EquipGroup.Create, {
+      ATK_Rate: 12, AGI_Rate: 6, Stable: 5, HP_Rate: -20
+    }),
     "free1": new AddEquipment("カスタム入力2", EquipGroup.None, {}),
     "free2": new AddEquipment("カスタム入力3", EquipGroup.None, {}),
   },
@@ -4395,6 +4398,8 @@ const SelectionData = {
         { MATK_Rate: 8, MATKPenetrate: 20, CSPD_Rate: -16 }),
       1120: new SelectorBase("バテュード",
         { MATK_Rate: 10, MATKPenetrate: 7, Hate: -11, MDEF_Rate: -30 }),
+      1121: new SelectorBase("キピナ",
+        { MATK_Rate: 12, MATKPenetrate: 8, Hate: -13, MDEF_Rate: -36 }),
       1130: new SelectorBase("ドリドディ",
         { LongDistance: 10, HIT_Rate: 17, HP_Rate: -25 }),
       1140: new SelectorBase("原初の誘月華",
@@ -19198,5 +19203,5 @@ const Js_Archive = "./Archive.min.js?ver=1.60";
 const Js_LocalSave = "./LocalSave.min.js?ver1.0.3";
 const Js_Ref = "./SkillReference.min.js?ver=1.33";
 const Js_AtherSys = "./AnotherSys.min.js?ver=1.31";
-const LatestVersion = "1.25.15.0";
+const LatestVersion = "1.25.16.0";
 const ErrDescriptions = [];
