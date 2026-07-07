@@ -833,6 +833,7 @@ class EquipGroup{
     Common:"スミス/汎用",
     Drop:"ドロップ品",
     Create: "鍛冶屋品",
+    Quest: "クエスト報酬品",
     Scroll: "忍術巻物",
     Knight: "短剣",
     Knight_Event:"短剣:イベント品",
@@ -875,6 +876,7 @@ class EquipGroup{
   static Common = "Common";
   static Drop = "Drop";
   static Create = "Create";
+  static Quest = "Quest";
   static Scroll = "Scroll";
   static AR = "Arrow";
   static SH = "Sheild";
@@ -3347,6 +3349,14 @@ const SelectionData = {
     3110: new AddEquipment("ライトニングフレイムⅡ", EquipGroup.DLEvent, {
       MainWepon_Wepon: "SF", MainWeponATK: 655, MainWepon_Stable: 60,
       MATKPenetrate: 50, CSPD: 900, CSPD_Rate: 40, AbsFREE: 10
+    }),
+    3120: new AddEquipment("エルチクタク", EquipGroup.Quest, {
+      MainWepon_Wepon: "MD", MainWeponATK: 66, MainWepon_Stable: 70, MainWepon_Smelting: 0,
+      ASPD: 1000, ASPD_Rate: 50,
+      CSPD: 1000, CSPD_Rate: 50,
+      HP: -500, HP_Rate: -25,
+      Critical: -50,
+      Critical_Rate:-25
     }),
     10000: new AddEquipment("ソードメイス", EquipGroup.Drop,
       { Distance: 10, Hate: 100, SwordPower_Rate: -50 }),
@@ -11992,6 +12002,23 @@ const MainMethod = {
 
     return Ans === "1";
   },
+  /**一覧表示時にメイン武器種と一致する武器種の表示のみに制限する機能が有効かを設定する。 */
+  CheckMainWepOnlySetProrerty: (value = null) => {
+    if (!window?.localStorage) return false;
+    
+    const Ans = window.localStorage.getItem("Toram_CheckMainWepOnlySetProrerty");
+    if (Ans === undefined) {
+      window.localStorage.setItem("Toram_CheckMainWepOnlySetProrerty", "0");
+      return false;
+    }
+
+    if (value !== null) {
+      window.localStorage.setItem("Toram_CheckMainWepOnlySetProrerty", value);
+      return;
+    }
+
+    return Ans === "1"; 
+  },
   //レベル選択フォーム生成
   //+データの書き換え
   AddLevelSelectors: (TargetElem, SkillRoot) => {
@@ -13743,7 +13770,16 @@ const MainMethod = {
         const Selector = Data.OtherInfo.EquipmentSelector;
         const ExtensionKey = EquipmentExtensionenum[Selector];
         
-        const CopyData = SelectionData[Selector].New();
+        const CopyData = (() => {
+          if (!MainMethod.CheckMainWepOnlySetProrerty()) return SelectionData[Selector].New();
+            
+          //武器種制限をしている場合は一致するデータのみを返す。
+          const MainWepon = Data.OtherInfo.Wepon;
+          return SelectionData[Selector]
+            .New()
+            .FilterObject((key, value) => value?.Base["MainWepon_Wepon"] === MainWepon || key === "0");
+          
+        })(); 
         
         //SortKey順番
         const SortKeyIndexies = {};
@@ -19199,9 +19235,9 @@ const RepairMissData = async () => {
   res.RepairMiss_AllData("重複装備品の修正を行います。");
 };
 
-const Js_Archive = "./Archive.min.js?ver=1.60";
+const Js_Archive = "./Archive.min.js?ver=1.61";
 const Js_LocalSave = "./LocalSave.min.js?ver1.0.3";
 const Js_Ref = "./SkillReference.min.js?ver=1.33";
 const Js_AtherSys = "./AnotherSys.min.js?ver=1.31";
-const LatestVersion = "1.25.16.0";
+const LatestVersion = "1.26.1.0";
 const ErrDescriptions = [];

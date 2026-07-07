@@ -1699,6 +1699,17 @@ const RenderElemet = {
       <input type="radio" id="wepattributeset2" class="WepAttributeSetSelector _radio" name="wepattributeset" value="0" checked>
       <label for="wepattributeset2" class="Config_SelectText _label _gray">無効</label>
     </div>
+    <p class="Config_MainText">メイン武器種の表示制限</p>
+    <p class="Config_Text">
+      現在のメイン武器と同じ武器種の装備品のみを表示します。<br>
+      装備品がない場合は『装備なし』以外を選択できなくなります。<br>
+    </p>
+    <div class="RADIOSET">
+      <input type="radio" id="mainweponlyset1" class="MainWepOnlySetSelector _radio" name="mainweponlyset" value="1">
+      <label for="mainweponlyset1" class="Config_SelectText _label _cherry">有効</label>
+      <input type="radio" id="mainweponlyset2" class="MainWepOnlySetSelector _radio" name="mainweponlyset" value="0" checked>
+      <label for="mainweponlyset2" class="Config_SelectText _label _gray">無効</label>
+    </div>
     <p class="Config_MainText">PTバフスキル優先表示設定</p>
     <p class="Config_Text">
       PT系バフスキルの表示優先度を指定します。<br>
@@ -2925,6 +2936,20 @@ const RenderEvent = {
       const value = e.target.value;
       MainMethod.CheckEnableSetEquipmentWeponProperty(value);
       MainRender.EquipmetIncludeProperty();
+      Method.SendCapturedAllData_OnlySend();
+    });
+
+    //メイン武器種のみの表示制限機能
+    const SetMainWepOnlySetProrertyMode = MainMethod.CheckMainWepOnlySetProrerty();
+    Judey.$cls("MainWepOnlySetSelector");
+    if (SetMainWepOnlySetProrertyMode  === false) 
+      Judey.$query(".MainWepOnlySetSelector[value='0']").Attr({ checked: true });
+    else
+      Judey.$query(".MainWepOnlySetSelector[value='1']").Attr({ checked: true });
+    
+    Judey.$cls("MainWepOnlySetSelector").Event("change", (e) => {
+      const value = e.target.value;
+      MainMethod.CheckMainWepOnlySetProrerty(value);
       Method.SendCapturedAllData_OnlySend();
     });
 

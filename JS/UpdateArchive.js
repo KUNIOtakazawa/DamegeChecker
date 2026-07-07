@@ -1544,7 +1544,11 @@ const UpdateArchives = [
     new Update("2026/6/19", "1.25.16.0", [
         new Update_Equipment(["ふわ耳帽子(追加)"]),
         new Update_Crystal(["キピナ(ウェポン)"])
-    ])
+    ]),
+    new Update("2026/7/7", "1.26.1.0", [
+        new Update_Function(["メイン武器種表示制限機能(メニュー内設定)"]),
+        new Update_Equipment(["エルチクタク(魔道具)"])
+    ]),
 ];
 
 /**更新履歴を表示する。 */
