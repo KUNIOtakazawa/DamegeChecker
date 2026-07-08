@@ -13771,7 +13771,7 @@ const MainMethod = {
         const ExtensionKey = EquipmentExtensionenum[Selector];
         
         const CopyData = (() => {
-          if (!MainMethod.CheckMainWepOnlySetProrerty()) return SelectionData[Selector].New();
+          if (!MainMethod.CheckMainWepOnlySetProrerty() || Selector !== "Wepon") return SelectionData[Selector].New();
             
           //武器種制限をしている場合は一致するデータのみを返す。
           const MainWepon = Data.OtherInfo.Wepon;
@@ -19239,5 +19239,5 @@ const Js_Archive = "./Archive.min.js?ver=1.61";
 const Js_LocalSave = "./LocalSave.min.js?ver1.0.3";
 const Js_Ref = "./SkillReference.min.js?ver=1.33";
 const Js_AtherSys = "./AnotherSys.min.js?ver=1.31";
-const LatestVersion = "1.26.1.0";
+const LatestVersion = "1.26.1.0.001";
 const ErrDescriptions = [];
