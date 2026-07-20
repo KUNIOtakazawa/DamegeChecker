@@ -1549,6 +1549,9 @@ const UpdateArchives = [
         new Update_Function(["メイン武器種表示制限機能(メニュー内設定)"]),
         new Update_Equipment(["エルチクタク(魔道具)"])
     ]),
+    new Update("2026/7/20", "1.26.2.0", [
+        new Update_Equipment(["メイプルの盾(サブ)"])
+    ])
 ];
 
 /**更新履歴を表示する。 */

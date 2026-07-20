@@ -4228,6 +4228,12 @@ const SelectionData = {
       SubWepon_Wepon: "SH", SubWeponATK: 100, SubWepon_Stable: 15,
       Guard_Repair: 25, Guard_Power: 25, HP: 1e5, FirstReturn: 25, Resist_Normal: 25
     }),
+    "sh9": new AddEquipment("メイプルの盾", EquipGroup.EventEquip, {
+      SubWepon_Wepon: "SH", SubWeponATK: 300, SubWepon_Stable: 15,
+      Guard_Repair: 40, Guard_Power: 40, VIT_Rate: 10,
+      Resist_Physical: 20, Resist_Magic: 20, Resist_Health: 10,
+      Matigation_Explosion:50,MP:-100,FREE_Rate:-100
+    }),
     "sc1": new AddEquipment("忍術巻物・金遁", EquipGroup.Scroll,
       { SubWepon_Wepon: "SC", SubWeponATK: 150, SubWepon_Stable: 0 ,Critical: 5 }),
     "sc2": new AddEquipment("忍術巻物・火遁", EquipGroup.Scroll,
@@ -19239,5 +19245,5 @@ const Js_Archive = "./Archive.min.js?ver=1.61";
 const Js_LocalSave = "./LocalSave.min.js?ver1.0.3";
 const Js_Ref = "./SkillReference.min.js?ver=1.33";
 const Js_AtherSys = "./AnotherSys.min.js?ver=1.31";
-const LatestVersion = "1.26.1.0.001";
+const LatestVersion = "1.26.2.0";
 const ErrDescriptions = [];
