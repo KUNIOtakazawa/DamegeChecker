@@ -1061,6 +1061,7 @@ class Answer{
   static SaveSelector4 = 15;
   static Approval = 16;
   static Selectors = 17;
+  static CompleteCancel = 18;
 
   static Text = Ans => {
     switch (Ans) {
@@ -1068,6 +1069,7 @@ class Answer{
       case Answer.OKCancel: return ["はい", "キャンセル"];
       case Answer.AddCancel: return ["登録", "キャンセル"];
       case Answer.UpdateCancel: return ["更新", "キャンセル"];
+      case Answer.CompleteCancel: return ["完了","キャンセル"];
       case Answer.OKOnly: return ["はい"];
       case Answer.CloseOnly: return ["閉じる"];
       case Answer.AnathorOK: return ["OK!", "終わる!!"];
