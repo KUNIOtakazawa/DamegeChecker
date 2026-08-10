@@ -13806,14 +13806,26 @@ const MainMethod = {
         const ExtensionKey = EquipmentExtensionenum[Selector];
         
         const CopyData = (() => {
-          if (!MainMethod.CheckMainWepOnlySetProrerty() || Selector !== "Wepon") return SelectionData[Selector].New();
-            
-          //武器種制限をしている場合は一致するデータのみを返す。
-          const MainWepon = Data.OtherInfo.Wepon;
-          return SelectionData[Selector]
-            .New()
-            .FilterObject((key, value) => value?.Base["MainWepon_Wepon"] === MainWepon || key === "0");
-          
+          if (Selector === "Wepon") {
+            //武器種制限をしている場合は一致するデータのみを返す。
+            const MainWepon = Data.OtherInfo.Wepon;
+            return SelectionData[Selector]
+              .New()
+              .FilterObject((key, value) => value?.Base["MainWepon_Wepon"] === MainWepon || key === "0");
+                    
+          } else if (Selector === "SubWepon") {
+            //表示制限をしている場合に絞り込みをする。
+            const RestrictionItem = MainMethod.GetEquipmentRestriction()?.SubWepon?.All;
+            if (!RestrictionItem || SubWepons.Elements.every(item => RestrictionItem.includes(item)))
+              return SelectionData[Selector].New();
+
+             return SelectionData[Selector]
+              .New()
+              .FilterObject((key, value) => key === "0" ||  RestrictionItem.includes(value?.Base["SubWepon_Wepon"]));           
+
+          } else {
+            return SelectionData[Selector].New();
+          }
         })(); 
         
         //SortKey順番
@@ -14439,6 +14451,30 @@ const MainMethod = {
     const res = await import(Js_Archive);
     res.AllCapturedSend(); 
   },
+  /**表示制限情報を取得する。 */
+  GetEquipmentRestriction: () => {
+    const InitBase = {
+      SubWepon: {
+        All: SubWepons.Elements
+      }
+    };
+
+    const StorageItem = window?.localStorage?.getItem("Toram_EquipmentRestriction") ?? null;
+    if (StorageItem === null) return InitBase;
+
+    const ParsedItem = StorageItem.Jparse();
+    if(ParsedItem?.SubWepon?.All)
+      InitBase.SubWepon.All = ParsedItem?.SubWepon?.All;
+
+    return ParsedItem;
+  },
+  /**表示制限の情報を登録する。 */
+  SetEquipmentRestriction: async (Value) => {
+    window?.localStorage?.setItem(`Toram_EquipmentRestriction`, Value);
+
+    const res = await import(Js_Archive);
+    res.AllCapturedSend(); 
+  }
 };
 
 const MainRender = {
@@ -14888,6 +14924,12 @@ const MainRender = {
       Judey.$cls("Equipment_Templates").Class("NoneText");
       Judey.$cls("OtherEquipmentEffect_Templates").RemClass("NoneText");
       return;
+    }
+
+    if (RootName === "SubWepon") {
+      Judey.$cls("EquipmentRestrictionChanger").RemClass("NoneText");
+    } else {
+      Judey.$cls("EquipmentRestrictionChanger").Class("NoneText");
     }
     
   
@@ -18019,7 +18061,100 @@ const MainRender = {
     await MainMethod.SetEquipmentTabName(result);
     MainRender.EquipmentTabName();
   },
+  /**装備品の表示制限 */
+  EquipmentRestrictionSelector: async () => {
+    // 既存の設定を取得
+    const CurrentData = MainMethod.GetEquipmentRestriction();
+    const ActiveList = CurrentData.SubWepon.All || [];
 
+    // HTML構築
+    const RenderElem = Judey.$Element("div", "", "EquipmentRestriction_Area");
+    RenderElem.AppendLast(`
+    <p class='AnswerItem' style='margin-bottom:15px; font-weight:bold;'>
+    表示するサブ装備の種類を設定してください。</br>
+    すべてON以外の場合、装備種がないものは表示されなくなります。</br>
+    <span style="color:var(--RedGrad2);font-weight:bold;">※装備品選択のモードが『クラシック』の場合は適用しません。</span>
+    </p>
+      `);
+    
+    // すべてOFFボタン（Flexで中央に配置）
+    const BtnArea = Judey.$Element("div", "", "Flex").Style("justify-content:center; margin-bottom:15px;");
+    BtnArea.AppendLast(`
+      <button type="button" class="ER_AllOffBtn" style="width:7rem;border-radius:20px;height:2rem;background-color:var(--BtnDeleteColor);">すべて非表示</button>
+    `);
+    BtnArea.AppendLast(`
+      <button type="button" class="ER_AllONBtn" style="margin-left:15px;width:7rem;border-radius:20px;height:2rem;background-color:var(--BtnNewColor);">すべて表示</button>
+    `);
+    RenderElem.AppendLast(BtnArea);
+
+    // ラジオボタンを格納・折り返し配置するためのFlexコンテナ
+    const RadioWrapper = Judey.$Element("div", "", "Flex").Style("flex-wrap:wrap; justify-content:center; gap:1px 2px;");
+
+    // SubWeponsのKey分、ラジオボタンのセットを定義
+    SubWepons.Elements.forEach((key, index) => {
+      const Name = SubWepons.Names[index];
+      const IsChecked = ActiveList.includes(key);
+
+      // Flexを指定し、水色のアンダーラインを追加
+      const RadioSet = Judey.$Element("div", "", "RADIOSET")
+        .Style("align-items:center; width:12rem; padding-bottom:4px;");
+      
+      // 文字幅4remの指定と中央揃え
+      RadioSet.AppendLast(`<span style="display:inline-block; width:4rem; text-align:center; font-weight:bold; margin-right:5px;">${Name}</span>`);
+      
+      // ON（表示）
+      RadioSet.AppendLast(`
+        <input type="radio" id="ER_${key}_ON" class="ER_Radio _radio" name="ER_${key}" value="${key}" ${IsChecked ? "checked" : ""}>
+        <label for="ER_${key}_ON" class="_label _cherry" style="width:3rem; margin:0 2px;">ON</label>
+      `);
+      // OFF（非表示）
+      RadioSet.AppendLast(`
+        <input type="radio" id="ER_${key}_OFF" class="ER_Radio _radio" name="ER_${key}" value="OFF" ${!IsChecked ? "checked" : ""}>
+        <label for="ER_${key}_OFF" class="_label _gray" style="width:3rem; margin:0 2px;">OFF</label>
+      `);
+
+      // 作成したセットをコンテナに追加
+      RadioWrapper.AppendLast(RadioSet);
+    });
+
+    RenderElem.AppendLast(RadioWrapper);
+
+    // ポップアップ表示
+    const result = await MainRender.AsyncAnswer(
+      RenderElem.Elem(), 
+      Answer.CompleteCancel,
+      () => {
+        // すべてOFFボタンのイベント登録
+        Judey.$cls("ER_AllOffBtn").Event("click", () => {
+          Judey.$query('input[value="OFF"].ER_Radio').EachElem(elem => elem.checked = true);
+        });
+        // すべてONボタンのイベント登録
+        Judey.$cls("ER_AllONBtn").Event("click", () => {
+          Judey.$query('input:not(input[value="OFF"]).ER_Radio').EachElem(elem => elem.checked = true);
+        });
+      },
+      async () => {
+        // 承認(Func1)時の処理：選択状態を取得
+        const NewList = [];
+        SubWepons.Elements.forEach(key => {
+          const checkedNode = Judey.query(`input[name="ER_${key}"]:checked`);
+          if (checkedNode && checkedNode.value === key) {
+            NewList.push(key);
+          }
+        });
+
+        // データを更新して保存
+        CurrentData.SubWepon.All = NewList;
+        await MainMethod.SetEquipmentRestriction(CurrentData.Json());
+        return true;
+      }
+    );
+
+    // 承認時の後続処理
+    if (result === AnswerResult.OK) {
+      MainRender.CheckAnswer("表示制限の設定しました。", false, Answer.OKOnly);
+    }
+  },
   /**装備品タブ名称を適用する。 */
   EquipmentTabName: () => {
     const TabTarget = [
@@ -18677,7 +18812,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       //タブ名称設定
       Judey.$cls("TabNameChanger").Event("click", async () => await MainRender.EquipmentTabSelecter());
-
+      Judey.$cls("EquipmentRestrictionChanger").Event("click", async () => await MainRender.EquipmentRestrictionSelector());
       CheckEditBtn();
     },
     Crystal_Events: () => {
@@ -19274,5 +19409,5 @@ const Js_Archive = "./Archive.min.js?ver=1.61";
 const Js_LocalSave = "./LocalSave.min.js?ver1.0.3";
 const Js_Ref = "./SkillReference.min.js?ver=1.33";
 const Js_AtherSys = "./AnotherSys.min.js?ver=1.31";
-const LatestVersion = "1.26.2.0";
+const LatestVersion = "1.27.1.1";
 const ErrDescriptions = [];

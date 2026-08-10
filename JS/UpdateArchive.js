@@ -1551,6 +1551,10 @@ const UpdateArchives = [
     ]),
     new Update("2026/7/20", "1.26.2.0", [
         new Update_Equipment(["メイプルの盾(サブ)"])
+    ]),
+    new Update("2026/8/10", "1.27.1.1", [
+        new Update_Fix(["プイエットのHP値を修正。"]),
+        new Update_Function(["サブ装備の表示制限機能"])
     ])
 ];
 

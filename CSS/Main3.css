@@ -3720,6 +3720,12 @@ html.cyber2 .FakeSelector{
         width: 9rem;
         background-color: var(--BtnChangeColor);
     }
+    .EquipmentRestrictionChanger{
+        margin-left: 1rem;
+        width: 9rem;
+        background-color: var(--BtnNewColor);
+    }
+
     .Equipment_ExtensionInfo {
         display:inline-block;
         padding:8px;
