@@ -684,6 +684,33 @@ class WeponAttribute{
     }
   }
 }
+
+/**武器の名前 */
+class WeponNames{
+  static BH = "無手";
+  static OH = "片手剣";
+  static TH = "両手剣";
+  static DS = "双剣";
+  static MA = "手甲";
+  static HB = "旋風槍";
+  static BW = "弓";
+  static BG = "自動弓";
+  static SF = "杖";
+  static MD = "魔道具";
+  static KTN = "抜刀剣";
+
+  static KN = "ナイフ";
+  static AR = "矢";
+  static SH = "盾";
+  static SC = "忍術巻物";
+}
+
+/**サブ武器の定義 */
+class SubWepons {
+  static Elements = ["KN", "AR", "SH", "SC", "OH", "MA", "MD", "KTN"];
+  static Names = ["ナイフ", "矢", "盾", "忍術巻物", "片手剣", "手甲", "魔道具", "抜刀剣"];
+}
+
 //common
 class SelectorBase{
   constructor(Name, Base,FilterNo = 0) {
