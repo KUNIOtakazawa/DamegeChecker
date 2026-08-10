@@ -4611,7 +4611,7 @@ const SelectionData = {
       }),
       335: new SelectorBase("プイエット", {
         ATK_Rate: 12, Critical: 12,
-        HP: -400, MP: -400
+        HP: -800, MP: -400
       }),
       336: new SelectorBase("豪雷破閃", {
         ATK_Rate: 7, MATK_Rate: 7,
