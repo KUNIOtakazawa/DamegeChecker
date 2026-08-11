@@ -16251,6 +16251,7 @@ const MainRender = {
         case Answer.OKCancel: return [AnswerResult.OK, AnswerResult.Cancel][Index];
         case Answer.AddCancel: return [AnswerResult.OK, AnswerResult.Cancel][Index];
         case Answer.UpdateCancel: return [AnswerResult.OK, AnswerResult.Cancel][Index];
+        case Answer.CompleteCancel: return [AnswerResult.OK, AnswerResult.Cancel][Index];
         case Answer.OKOnly: return AnswerResult.OK;
         case Answer.CloseOnly: return AnswerResult.OK;
         case Answer.AnathorOK: return AnswerResult.OK;
