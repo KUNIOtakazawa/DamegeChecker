@@ -3981,6 +3981,9 @@ const SelectionData = {
     2560: new AddEquipment("ふわ耳帽子", EquipGroup.Create, {
       ATK_Rate: 12, AGI_Rate: 6, Stable: 5, HP_Rate: -20
     }),
+    2570: new AddEquipment("ローズアイパッチ", EquipGroup.Drop, {
+      SwordPower_Rate: 10, Critical: 15, Special_Future: 20, Resist_Fire: -30
+    }),
     "free1": new AddEquipment("カスタム入力2", EquipGroup.None, {}),
     "free2": new AddEquipment("カスタム入力3", EquipGroup.None, {}),
   },
@@ -5373,6 +5376,17 @@ const SelectionData = {
           { SPD: 5, Resist_Physical: -10, Resist_Magic: -15, },
           Refs.OtherInfo.ArmorOption === "light"
         )
+      }
+    ),
+    new AddEquipmentExtension(
+      EquipmentExtensionenum.Addition,
+      2570,
+      "抜刀剣装備時：クリティカル率+15",
+      Refs => {
+        return new EquipmentExtensionResult(
+          { Critical: 15 },
+          Refs.OtherInfo.Wepon === "KTN" || Refs.OtherInfo.SubWepon === "KTN"
+        );
       }
     ),
     new AddEquipmentExtension(
@@ -13806,7 +13820,7 @@ const MainMethod = {
         const ExtensionKey = EquipmentExtensionenum[Selector];
         
         const CopyData = (() => {
-          if (Selector === "Wepon") {
+          if (MainMethod.CheckMainWepOnlySetProrerty() && Selector === "Wepon") {
             //武器種制限をしている場合は一致するデータのみを返す。
             const MainWepon = Data.OtherInfo.Wepon;
             return SelectionData[Selector]
@@ -19410,5 +19424,5 @@ const Js_Archive = "./Archive.min.js?ver=1.61";
 const Js_LocalSave = "./LocalSave.min.js?ver1.0.3";
 const Js_Ref = "./SkillReference.min.js?ver=1.33";
 const Js_AtherSys = "./AnotherSys.min.js?ver=1.31";
-const LatestVersion = "1.27.1.1";
+const LatestVersion = "1.27.2.0";
 const ErrDescriptions = [];
