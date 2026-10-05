@@ -888,6 +888,7 @@ class EquipGroup{
     HighLv_Alterdarl: "高難易度:アルタダール",
     Edwards: "高難易度:エトワーズ",
     HighLv_Castile: "高難易度:カスティリア",
+    HighLv_Jalga:"高難易度:ジャルーガ",
     SnowEvent: "雪合戦",
   };
   //AttributeA.KeyEach((Key) => EquipGroup.prototype[Key+"AAA"] = Attribute[Key]);
@@ -931,6 +932,7 @@ class EquipGroup{
   static Spring2024 = "Spring2024";
   static DLEvent = "DLEvent";
   static HighLv_Castile = "HighLv_Castile";
+  static HighLv_Jalga = "HighLv_Jalga";
   static SnowEvent = "SnowEvent";
 }
 class SkillGroup{
@@ -3984,6 +3986,9 @@ const SelectionData = {
     2570: new AddEquipment("ローズアイパッチ", EquipGroup.Drop, {
       SwordPower_Rate: 10, Critical: 15, Special_Future: 20, Resist_Fire: -30
     }),
+    2580: new AddEquipment("イミウスティアラ", EquipGroup.HighLv_Jalga, {
+      ATK_Rate: 13, Stable: 10, LongDistance: -5
+    }),
     "free1": new AddEquipment("カスタム入力2", EquipGroup.None, {}),
     "free2": new AddEquipment("カスタム入力3", EquipGroup.None, {}),
   },
@@ -4428,6 +4433,11 @@ const SelectionData = {
           Matigation_Blade: 20, Matigation_Bullet: 20,
           Hate: -40,
         }),
+      1061: new SelectorBase("ジャルーガ", {
+        ATK_Rate: 13, MATK_Rate: 13,
+        Matigation_Blade: 26, Matigation_Bullet: 26,
+        Matigation_Explosion: 26, Hate: -52
+      }),
       1070: new SelectorBase("ハナヘビ",
         { Stable: 5, MATKPenetrate: 20, Hate: -15 }),
       1080: new SelectorBase("ポムーチェンⅡ",
@@ -19424,5 +19434,5 @@ const Js_Archive = "./Archive.min.js?ver=1.61";
 const Js_LocalSave = "./LocalSave.min.js?ver1.0.3";
 const Js_Ref = "./SkillReference.min.js?ver=1.33";
 const Js_AtherSys = "./AnotherSys.min.js?ver=1.31";
-const LatestVersion = "1.27.2.0";
+const LatestVersion = "1.27.4.0";
 const ErrDescriptions = [];

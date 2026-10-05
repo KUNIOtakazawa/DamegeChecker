@@ -1559,6 +1559,12 @@ const UpdateArchives = [
     new Update("2026/8/20", "1.27.2.0", [
         new Update_Equipment(["ローズアイパッチ(追加)"])
     ]),
+    new Update("2026/8/28", "1.27.3.0", [
+        new Update_Crystal(["ジャルーガ(ウェポン)"])
+    ]),
+    new Update("2026/10/5", "1.27.4.0", [
+        new Update_Equipment(["イミウスティアラ(追加)"])
+    ]),
 ];
 
 /**更新履歴を表示する。 */
