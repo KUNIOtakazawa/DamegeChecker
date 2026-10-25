@@ -1565,6 +1565,14 @@ const UpdateArchives = [
     new Update("2026/10/5", "1.27.4.0", [
         new Update_Equipment(["イミウスティアラ(追加)"])
     ]),
+    new Update("2026/10/25", "1.27.5.1", [
+        new Update_Fix([
+            "ランタンケーキのバフ効果修正",
+            "攻撃スキルの名称修正"
+        ]),
+        new Update_Crystal(["アッブ(オプション)"]),
+        new Update_Item(["シージャーキー(MP)"]),
+    ])
 ];
 
 /**更新履歴を表示する。 */

@@ -4738,6 +4738,9 @@ const SelectionData = {
       }),
       236: new SelectorBase("デラダンビット", {
         MATK_Rate: 12, CriticalDamege: 8, DEX_Rate: 5, HIT_Rate: -20
+      }),
+      237: new SelectorBase("アッブ", {
+        Distance: 12, Special_DefBreak: 15
       })
     },
     Option: {
@@ -5887,6 +5890,17 @@ const SelectionData = {
     ),
     new AddEquipmentExtension(
       EquipmentExtensionenum.Cry_Addition,
+      237,
+      "盾装備時：ヘイト+15%",
+      Refs => {
+        return new EquipmentExtensionResult(
+          { Hate: 15 },
+          Refs.OtherInfo.SubWepon === "SH"
+        )
+      }
+    ),
+    new AddEquipmentExtension(
+      EquipmentExtensionenum.Cry_Addition,
       235,
       "重鎧装備時：物理耐性+24%",
       Refs => {
@@ -6043,7 +6057,7 @@ const SelectionData = {
       2: new SelectorBase("ペネトレートオイル", { ATK_Rate: 3, ATKPenetrate: 10 }),
       3: new SelectorBase("スラッシュオイル", { SwordPower: 100, SwordPower_Rate: 5 }),
       4: new SelectorBase("松茸スープ", { WeponATK_Rate: 10, MPRecovery: 10 }),
-      5: new SelectorBase("ランタンケーキ", { ATK_Rate: 10 }),
+      5: new SelectorBase("ランタンケーキ", { ATK_Rate: 10, SPD: -10 }),
       6: new SelectorBase("ドーピング剤", { ATK_Rate: 4, STR_Rate: 2, HIT_Rate: 1 }),
       7: new SelectorBase("パンプソンパフェ", { ATK_Rate: 6 }),
       8: new SelectorBase("ポム屋の焼き団子", { WeponATK_Rate: 5, ATKPenetrate: 5 }),
@@ -6106,6 +6120,7 @@ const SelectionData = {
       3: new SelectorBase("ロノーゴ海老ソテー", { MP: 300, CSPD: 250 }, 7),
       4: new SelectorBase("ソウルプリン", { MP: 300, HP: 1000 }, 8),
       8: new SelectorBase("キニナーレ", { MP: 100, Hate: 20 }, 9),
+      9: new SelectorBase("シージャーキー", { MP: 200, AGI_Rate: 2 }),
     },
     HP: {
       0: new SelectorBase("なし", {}),
@@ -9569,7 +9584,7 @@ const SelectionData = {
       }
     },
     "DS-4-30": {
-      Name: "エアリアルレイ",
+      Name: "エリアルスレイ",
       Tree:SkillTree.DualSword,
       Torauma: Torauma.Physical,
       Group: "DualSword",
@@ -19434,5 +19449,5 @@ const Js_Archive = "./Archive.min.js?ver=1.61";
 const Js_LocalSave = "./LocalSave.min.js?ver1.0.3";
 const Js_Ref = "./SkillReference.min.js?ver=1.33";
 const Js_AtherSys = "./AnotherSys.min.js?ver=1.31";
-const LatestVersion = "1.27.4.0";
+const LatestVersion = "1.27.5.1";
 const ErrDescriptions = [];
