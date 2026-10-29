@@ -3989,6 +3989,9 @@ const SelectionData = {
     2580: new AddEquipment("イミウスティアラ", EquipGroup.HighLv_Jalga, {
       ATK_Rate: 13, Stable: 10, LongDistance: -5
     }),
+    2590: new AddEquipment("ジュノクスヘアー", EquipGroup.EventEquip, {
+      Distance: 13, HIT: 66, Stable: 6, Resist_Physical: -18
+    }),
     "free1": new AddEquipment("カスタム入力2", EquipGroup.None, {}),
     "free2": new AddEquipment("カスタム入力3", EquipGroup.None, {}),
   },
@@ -4837,6 +4840,10 @@ const SelectionData = {
       }),
       233: new SelectorBase("ポトゥムッターⅢ", {
         MP: 500, SPD: 2, Hate: -30, Resist_Normal: 30
+      }),
+      234: new SelectorBase("月目の誘麗", {
+        ATK_Rate: 13, HIT_Rate: 6, SPD: 6, Avoid_Repair: 6,
+        Resist_Aqua: -18
       }),
       100: new SelectorBase("星の魔導士",
         { MATK_Rate: 9, CSPD_Rate: 9, Special_Future: 9 }),
@@ -19449,5 +19456,5 @@ const Js_Archive = "./Archive.min.js?ver=1.61";
 const Js_LocalSave = "./LocalSave.min.js?ver1.0.3";
 const Js_Ref = "./SkillReference.min.js?ver=1.33";
 const Js_AtherSys = "./AnotherSys.min.js?ver=1.31";
-const LatestVersion = "1.27.5.1";
+const LatestVersion = "1.27.6.0";
 const ErrDescriptions = [];

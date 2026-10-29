@@ -1572,6 +1572,10 @@ const UpdateArchives = [
         ]),
         new Update_Crystal(["アッブ(オプション)"]),
         new Update_Item(["シージャーキー(MP)"]),
+    ]),
+    new Update("2026/10/29", "1.27.6.0", [
+        new Update_Equipment(["ジュノクスヘアー(追加)"]),
+        new Update_Crystal(["月目の誘麗(アクセサリー)"])
     ])
 ];
 
