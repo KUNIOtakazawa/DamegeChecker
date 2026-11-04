@@ -1576,7 +1576,13 @@ const UpdateArchives = [
     new Update("2026/10/29", "1.27.6.0", [
         new Update_Equipment(["ジュノクスヘアー(追加)"]),
         new Update_Crystal(["月目の誘麗(アクセサリー)"])
-    ])
+    ]),
+    new Update("2026/11/4", "1.27.7.0", [
+        new Update_Crystal([
+            "死霊使いウーサン(ウェポン)",
+            "ブラン(ノーマル)"
+        ])
+    ]),
 ];
 
 /**更新履歴を表示する。 */

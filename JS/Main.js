@@ -4516,6 +4516,9 @@ const SelectionData = {
         ATK_Rate: 12, MATK_Rate: 12,
         NaturalRecovery_HP_Rate: -14,
         NaturalRecovery_MP_Rate: -14
+      }),
+      1280: new SelectorBase("死霊使いウーサン", {
+        MATK_Rate: 12, Pursuit_MATK: 125, ASPD: 200, Barrier_Magic: 200
       })
     },
     Armor: {
@@ -4927,6 +4930,10 @@ const SelectionData = {
       }),
       N114: new SelectorBase("チュルミナ", {
         Stable:6,HIT_Rate:6,Critical_Rate:6
+      }),
+      N115: new SelectorBase("ブラン", {
+        Distance: 10, Stable: 5, Avoid_Repair: 5,
+        LongDistance: -15
       }),
       N300: new SelectorBase("クリティカル率+5",
         { Critical: 5 }),
@@ -19456,5 +19463,5 @@ const Js_Archive = "./Archive.min.js?ver=1.61";
 const Js_LocalSave = "./LocalSave.min.js?ver1.0.3";
 const Js_Ref = "./SkillReference.min.js?ver=1.33";
 const Js_AtherSys = "./AnotherSys.min.js?ver=1.31";
-const LatestVersion = "1.27.6.0";
+const LatestVersion = "1.27.7.0";
 const ErrDescriptions = [];
