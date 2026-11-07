@@ -12911,8 +12911,11 @@ const MainMethod = {
       }
       if (LocalItems["ComboSkill"]) {
         Object.keys(LocalItems["ComboSkill"]).forEach(Key => {
-          SelectionData["ComboSkill"][Key] = LocalItems["ComboSkill"][Key]
-        })
+          if (LocalItems["ComboSkill"][Key] !== null)
+            SelectionData["ComboSkill"][Key] = LocalItems["ComboSkill"][Key]
+          else
+            delete SelectionData["ComboSkill"][Key];
+        });
       } 
       if (LocalItems["EnemyExtension"]) {
         LocalItems["EnemyExtension"].KeyEach(key => {
@@ -15236,9 +15239,15 @@ const MainRender = {
       }
       
       //もとからあるコンボ類は編集不可
-      ["none", "Master1", "Master2"].includes(Value)
-        ? BtnArea.Append(NewBtn, Judey.InsertLast)
-        : BtnArea.Append(NewBtn + EditBtn, Judey.InsertLast);
+      if (Value.includes("none")) {
+        BtnArea.Append(NewBtn, Judey.InsertLast);
+      } else if (["Master1", "Master2"].includes(Value)) {
+        const DeleteBtn = `<button type="button" class="ComboSelector_Btn" value="delete">コンボ削除</button>`;
+
+        BtnArea.Append(NewBtn + DeleteBtn, Judey.InsertLast);
+      } else {
+        BtnArea.Append(NewBtn + EditBtn, Judey.InsertLast);
+      }
       
       MainRender.HideOptions();
       
@@ -15248,10 +15257,16 @@ const MainRender = {
         if(EditStatus === "edit") MainRender.ComboEdit(Value);
         if (EditStatus === "delete") {
           MainRender.CheckAnswer("削除しますか?", false, Answer.YESNo, () => {
+            delete SelectionData.ComboSkill[Value];
+
             const Result = MainMethod.GetMyLocal();
 
-            delete Result.ComboSkill[Value];
-            delete SelectionData.ComboSkill[Value];
+            if (!["Master1", "Master2"].includes(Value)) {
+              delete Result.ComboSkill[Value];
+            } else {
+              if (!Result["ComboSkill"]) Result["ComboSkill"] = {};
+              Result.ComboSkill[Value] = null;
+            }
 
             MainMethod.SetMyLocal(Result);
 
@@ -19463,5 +19478,5 @@ const Js_Archive = "./Archive.min.js?ver=1.61";
 const Js_LocalSave = "./LocalSave.min.js?ver1.0.3";
 const Js_Ref = "./SkillReference.min.js?ver=1.33";
 const Js_AtherSys = "./AnotherSys.min.js?ver=1.31";
-const LatestVersion = "1.27.7.0";
+const LatestVersion = "1.27.7.1";
 const ErrDescriptions = [];
